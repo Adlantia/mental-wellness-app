@@ -34,8 +34,6 @@ export default function Signup() {
                            <button className="border-indigo-700 bg-indigo-700 text-white w-full py-3 rounded-md hover:bg-transparent hover:text-indigo-700 font-semi-bold">Register</button>
                        </div>
                    </form>
-
-
                </div>
            </div>
 
