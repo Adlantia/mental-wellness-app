@@ -1,5 +1,30 @@
+import {Journal} from "@/app/shared/Journal";
 
 export default function JournalList() {
+    const journals = [
+        {
+            journalId: 'd96b4953-4d15-4cf7-90d2-25b32d3bb2b2',
+            journalProfileId: '891f85a2-c9ff-45b7-b988-d62c02aedd10',
+            journalTitle: 'ImATitle',
+            journalDateTime: '01/12/2000',
+            journalText: 'jldjld sdljfds; ljl;k'
+},
+        {
+            journalId: 'd5db31a1-0f4f-4552-9c01-40241bdc23a6',
+            journalProfileId: '623e4546-7ebc-41dc-a276-2c981f54fe52',
+            journalTitle: 'ImAnotherTitle',
+            journalDateTime: '01/04/2000',
+            journalText: 'jdlsjd lsdjd '
+        },
+
+        {
+            journalId: '478c380d-d111-4f31-a334-4aad15ebeb62',
+            journalProfileId: '2f4c14a5-4b7e-4e9e-8d17-64a04cde9469',
+            journalTitle: 'New Title',
+            journalDateTime: '01/01/2000',
+            journalText: 'lskwks skeidkdm'
+        }
+    ]
     return (
         <>
 
@@ -12,26 +37,13 @@ export default function JournalList() {
                 </button>
 
                 <div className="flex flex-col items-center justify-center sm:flex-row sm:flex-wrap">
-                    <div className="bg-gray-100 p-4 rounded-lg shadow-md mb-5 mx-2 w-56 sm:w-auto">
-                        <h2 className="text-lg font-semibold">Journal Entry Title</h2>
-                        <p className="text-sm text-gray-500">Date: xx/xx/xxx</p>
-                        <p className="text-sm text-gray-700">This is a placeholder text for the journal entry.</p>
-                    </div>
-                    <div className="bg-gray-100 p-4 rounded-lg shadow-md mb-5 mx-2 w-56 sm:w-auto">
-                        <h2 className="text-lg font-semibold">Journal Entry Title</h2>
-                        <p className="text-sm text-gray-500">Date: xx/xx/xx</p>
-                        <p className="text-sm text-gray-700">This is a placeholder text for the journal entry.</p>
-                    </div>
-                    <div className="bg-gray-100 p-4 rounded-lg shadow-md mb-5 mx-2 w-56 sm:w-auto">
-                        <h2 className="text-lg font-semibold">Journal Entry Title</h2>
-                        <p className="text-sm text-gray-500">Date: xx/xx/xx</p>
-                        <p className="text-sm text-gray-700">This is a placeholder text for the journal entry.</p>
-                    </div>
-                    <div className="bg-gray-100 p-4 rounded-lg shadow-md mb-5 mx-2 w-56 sm:w-auto">
-                        <h2 className="text-lg font-semibold">Journal Entry Title</h2>
-                        <p className="text-sm text-gray-500">Date: xx/xx/xx</p>
-                        <p className="text-sm text-gray-700">This is a placeholder text for the journal entry.</p>
-                    </div>
+
+
+                    {journals.map( journal => <Journal key={journal.journalId} journal={journal}/>
+                    )}
+
+
+
                 </div>
             </div>
 
