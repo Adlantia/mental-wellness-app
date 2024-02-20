@@ -5,7 +5,7 @@ export default function JournalEntry (){
                 Journal
             </header>
 
-            <form id="journalForm">
+            <form id="journalForm" className="mb-10">
                 <input
                     type="text"
                     id="entryTitle"
@@ -16,7 +16,8 @@ export default function JournalEntry (){
                         padding: '10px 10px',
                         marginBottom: '10px',
                         color: '#555',
-                    }}
+                    }
+                }
                     placeholder="Title"
                     required
                 />
@@ -24,7 +25,7 @@ export default function JournalEntry (){
                 <textarea
                     id="entryContent"
                     name="entryContent"
-                    rows="8"
+                    rows= {8}
                     style={{
                         fontSize: '16px',
                         width: '100%',
