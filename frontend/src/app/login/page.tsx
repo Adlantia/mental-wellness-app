@@ -23,10 +23,6 @@ export default function Signin() {
                                placeholder="Enter Password..." required/>
                     </div>
                     <div className="mt-3 flex justify-between items-center">
-                        <div>
-                            <input type="checkbox"/>
-                            <label htmlFor="checkbox" className="pl-2">Remember Me</label>
-                        </div>
                          <div>
                             <a href="#" className="font-semi-bold text-indigo-900">Forgot Password?</a>
                         </div>
