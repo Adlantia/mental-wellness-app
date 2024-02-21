@@ -33,13 +33,13 @@ export default function JournalList() {
                 <button
                     className="mb-4 bg-white p-6 rounded-lg shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 w-64">
                     <span className="text-lg font-semibold">Add Entry</span>
-                    <span className="ml-4 text-blue-900">+</span>
+                    <span className="ml-4 pb-1 font-bold text-xl text-blue-900">+</span>
                 </button>
 
                 <div className="flex flex-col items-center justify-center sm:flex-row sm:flex-wrap">
 
 
-                    {journals.map( journal => <Journal key={journal.journalId} journal={journal}/>
+                {journals.map( journal => <Journal key={journal.journalId} journal={journal}/>
                     )}
 
 
