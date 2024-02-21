@@ -30,11 +30,12 @@ export default function JournalList() {
 
             <div className="flex flex-col justify-start items-center mt-8">
                 <h1 className="text-3xl font-semibold mb-8">Journal</h1>
+                <a href='/journal-entry'>
                 <button
                     className="mb-4 bg-white p-6 rounded-lg shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 w-64">
                     <span className="text-lg font-semibold">Add Entry</span>
                     <span className="ml-4 pb-1 font-bold text-xl text-blue-900">+</span>
-                </button>
+                </button></a>
 
                 <div className="flex flex-col items-center justify-center sm:flex-row sm:flex-wrap">
 
