@@ -7,7 +7,7 @@ export function Navigation () {
         <div className="navbar bg-base-300 justify-between">
             <div className="flex-none">
                 <button className="btn btn-circle btn-ghost color-primary">
-                    <a><FontAwesomeIcon className="w-5 h-5" icon={faHouse}/></a>
+                    <a href='dashboard'><FontAwesomeIcon className="w-5 h-5" icon={faHouse}/></a>
                 </button>
             </div>
             <div>
@@ -30,9 +30,9 @@ export function Navigation () {
                     </div>
                     <ul tabIndex={0}
                         className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-52">
-                        <li><a>Mood</a></li>
-                        <li><a>Sleep</a></li>
-                        <li><a>Journal</a></li>
+                        <li><a href='/mood'>Mood</a></li>
+                        <li><a href='/sleep'>Sleep</a></li>
+                        <li><a href='/journal-list'>Journal</a></li>
                         <li><a>Logout</a></li>
                     </ul>
                 </div>
