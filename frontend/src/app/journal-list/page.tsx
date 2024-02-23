@@ -38,12 +38,8 @@ export default function JournalList() {
                 </button></a>
 
                 <div className="flex flex-col items-center justify-center sm:flex-row sm:flex-wrap">
-
-
                 {journals.map( journal => <Journal key={journal.journalId} journal={journal}/>
                     )}
-
-
 
                 </div>
             </div>
