@@ -18,8 +18,10 @@ export default function RootLayout(props : RootLayoutProps) {
     return (
         <html  lang="en" suppressHydrationWarning>
         <body>
-        <Navigation />
-        {children}
+        <div className="min-h-screen">
+            <Navigation />
+            {children}
+        </div>
         <Footer />
         </body>
         </html>
