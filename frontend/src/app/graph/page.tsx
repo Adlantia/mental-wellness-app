@@ -1,6 +1,6 @@
 
 'use client'
-import {LineChart, Line, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts';
+import {LineChart, Line, CartesianGrid, Tooltip, YAxis} from 'recharts';
 
 
 
@@ -24,16 +24,17 @@ const renderLineChart = (
     <Line type="monotone" dataKey="mood" stroke="#8884d8" />
       <Line type="monotone" dataKey="sleep" stroke="#FFFFFF" />
     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-    <XAxis dataKey="date" />
     <YAxis />
     <Tooltip />
   </LineChart>
 );
 export default function Graph () {
     return (
-        <div>
-            <h1>Graph</h1>
+        <div className="flex mx-auto flex-col">
+            <h1 className="text-2xl mx-auto">Graph</h1>
+            <div>
             {renderLineChart}
+            </div>
         </div>
     )
 }
