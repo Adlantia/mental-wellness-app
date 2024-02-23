@@ -24,10 +24,10 @@ export default function ViewJournalEntry (){
 
     return (
         <>
-            <header style={{fontSize: '24px', margin: '20px 0', textAlign: 'center'}}>
+            <h1 className = "text-3xl mx-auto text-center my-3">
                 Journal
-            </header>
-            <div className = "p-4">
+            </h1>
+            <div className = "p-4 w-3/4 mx-auto">
                 <div className="flex">
                         <p>
                         <Journal  journal={journalEntry}/>
