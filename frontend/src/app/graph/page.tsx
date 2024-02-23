@@ -22,7 +22,7 @@ const data = [
 const renderLineChart = (
   <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
     <Line type="monotone" dataKey="mood" stroke="#8884d8" />
-      <Line type="monotone" dataKey="sleep" stroke="#FFFFFF" />
+      <Line type="monotone" dataKey="sleep" stroke="#FF0000" />
     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
     <YAxis />
     <Tooltip />
@@ -31,7 +31,7 @@ const renderLineChart = (
 export default function Graph () {
     return (
         <div className="flex mx-auto flex-col">
-            <h1 className="text-2xl mx-auto">Graph</h1>
+            <h1 className="text-2xl text-center">Graph</h1>
             <div>
             {renderLineChart}
             </div>
