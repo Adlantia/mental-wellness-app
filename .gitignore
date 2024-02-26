@@ -1,7 +1,15 @@
+
 /.idea
 .DS_Store
 node_modules
 /src/dist
+
+
+*/src/dist
+*/node_modules
+.idea
+*/.Ds_Store
+
 
 project.env
 */.pnp
