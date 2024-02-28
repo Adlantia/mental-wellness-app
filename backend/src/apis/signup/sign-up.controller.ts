@@ -33,14 +33,14 @@ export async function signUpController (request: Request, response: Response): P
 
     const profileActivationToken = setActivationToken()
 
-    const basePath: string = `${request.protocol}://${request.hostname}:8080${request.originalUrl}activation/${profileActivationToken}`
+    const basePath: string = `${request.protocol}://${request.hostname}:8080${request.originalUrl}/activation/${profileActivationToken}`
 
-        const message = `<h2> Welcome to Mindsight. </h2>h2>
+        const message = `<h2> Welcome to Mindsight. </h2>
     <p>In order to start tracking data, you must first confirm your account.</p>
     <p><a href="${basePath}">${basePath}</a></p>`
 
         const mailgunMessage = {
-        from: `Mailgun Sandbox <mailgun@sandboxd80186a1e1544b0196f8b54ca2bb4db0.mailgun.org>`,
+        from: `Mailgun Sandbox <mailgun@${process.env.MAILGUN_DOMAIN as string}>`,
         to: profileEmail,
         subject: 'One step closer to signup -- Account Activation',
         html: message}
