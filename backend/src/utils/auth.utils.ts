@@ -1,5 +1,6 @@
 import * as argon2 from 'argon2'
 import { sign } from 'jsonwebtoken'
+import crypto from "crypto";
 
 
 export function generateJwt (payload: object, signature: string): string {
@@ -35,4 +36,8 @@ export async function validatePassword (hash: string, password: string): Promise
             memoryCost: 2 ** 16,
             hashLength: 32
         })
+}
+
+export function setActivationToken (): string {
+    return crypto.randomBytes(16).toString('hex')
 }

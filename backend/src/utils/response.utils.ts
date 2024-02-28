@@ -17,7 +17,7 @@ export function createStatus (status: number, data: unknown, message: string | n
  * @param response an object modeling the response that will be sent to the client.
  * @param error an object containing the errors from zod validation
  */
-export function zodErrorResponse (response: Response, error: ZodError): Response<Status> {
+export function zodErrorResponse(response: Response, error: ZodError): Response<Status> {
     const message = error.issues[0].message
     return errorResponse(response, createStatus(418, null, message))
 }
