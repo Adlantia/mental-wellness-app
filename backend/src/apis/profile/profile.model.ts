@@ -45,4 +45,19 @@ export async function selectPrivateProfileByProfileActivationToken (profileActiv
     return result?.length === 1 ? result[0] : null
 }
 
+/**
+ * Selects the privateProfile from profile table by profileEmail
+ * @param profileEmail - the profile's email to search for
+ * @returns Profile or null if no profile was found
+ */
 
+export async function selectPrivateProfileByProfileEmail(profileEmail: string): Promise<PrivateProfile | null> {
+    //create prepared statement  that selects profile by profileEmail and execute
+    const rowlist = await sql`SELECT profile_id, profile_activation_token, profile_email, profile_hash, profile_name FROM profile WHERE profile_email = ${profileEmail}`
+
+    //enforce that the result is array length one or null
+    const result = PrivateProfileSchema.array().max(1).parse(rowlist)
+
+    //return the profile or null if none found
+    return result?.length === 1 ? result[0] : null
+}
