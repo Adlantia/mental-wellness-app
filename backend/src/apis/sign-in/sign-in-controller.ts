@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {signInProfileSchema} from "./sign-in-validator";
 import {zodErrorResponse} from "../../utils/response.utils";
-import {PrivateProfile} from "../profile/profile.model";
+import {PrivateProfile, selectPrivateProfileByProfileEmail} from "../profile/profile.model";
 import {Status} from "../../utils/interfaces/Status";
 import {generateJwt, validatePassword} from "../../utils/auth.utils";
 import {v4 as uuid} from 'uuid'
