@@ -1,6 +1,7 @@
 
 import {Router} from "express";
 import { getAllTrackers, getTrackerByTrackerIdController, postTrackerController } from "./tracker.controller";
+import {isLoggedInController} from "../../utils/controllers/isLoggedInController";
 
 
 // declare a basePath for this router
@@ -12,7 +13,7 @@ const router = Router()
 
 // define tracker route for this router
 router.route('/')
-    .post(postTrackerController)
+    .post(isLoggedInController, postTrackerController)
     .get(getAllTrackers);
 
 router.route('/trackerId')
