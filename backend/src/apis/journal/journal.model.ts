@@ -29,8 +29,15 @@ export async function createJournal(journal: Journal): Promise<string> {
     return "Journal entry created successfully"
 }
 
+
+
 /**
- * Get all journal entries for a user
- * @param journalProfileId {string} the profile id of the user
- * @returns {Promise<Journal[]>} the journal entries
+ * Get all journal entries for a profile
+ * @param journalProfileId {string} the profile id to get journal entries for user
+ * @returns {Promise<Journal[]>} a list of journal entries
  */
+
+export async function getJournalEntries(): Promise<Journal[]> {
+    const rowList = <Journal[]> await sql`SELECT journal_id, journal_profile_id, journal_datetime,journal_text, journal_title FROM journal`
+    return JournalSchema.array().parse(rowList)
+}
