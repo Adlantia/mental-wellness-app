@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import {PrivateProfileSchema} from "../profile/profilevalidator";
+import {PrivateProfileSchema} from "../profile/profile.validator";
 
 export const SignUpProfileSchema = PrivateProfileSchema
 .omit({profileId: true, profileActivationToken: true, profileHash: true})

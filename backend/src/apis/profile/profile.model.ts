@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import {PrivateProfileSchema, PublicProfileSchema} from "./profilevalidator";
+import {PrivateProfileSchema, PublicProfileSchema} from "./profile.validator";
 import {sql} from "../../utils/database.utils";
 
 /**
@@ -12,6 +12,7 @@ import {sql} from "../../utils/database.utils";
  */
 
 export type PrivateProfile = z.infer<typeof PrivateProfileSchema>
+export type PublicProfile = z.infer<typeof PublicProfileSchema>
 
 /**
  * The shape of the public profile that can be shared with Next.js
@@ -19,8 +20,6 @@ export type PrivateProfile = z.infer<typeof PrivateProfileSchema>
  * @property profileEmail {string|null} the profile's email
  * @property profileName {string} the profile's name
  */
-
-export type PublicProfile = z.infer<typeof PublicProfileSchema>
 
 export async function insertProfile (profile: PrivateProfile): Promise<string> {
 

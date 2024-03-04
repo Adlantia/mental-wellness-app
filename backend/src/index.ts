@@ -1,4 +1,5 @@
 import { App } from './App'
+
 import {PublicProfile} from "./apis/profile/profile.model"
 
 declare module 'express-session' {
