@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import {PrivateProfileSchema} from "./profilevalidator";
+import {PrivateProfileSchema, PublicProfileSchema} from "./profile.validator";
 import {sql} from "../../utils/database.utils";
 
 /**
@@ -13,6 +13,7 @@ import {sql} from "../../utils/database.utils";
 
 
 export type PrivateProfile = z.infer<typeof PrivateProfileSchema>
+export type PublicProfile = z.infer<typeof PublicProfileSchema>
 
 export async function insertProfile (profile: PrivateProfile): Promise<string> {
 
