@@ -17,8 +17,8 @@ export async function insertTracker(tracker: Tracker): Promise<string> {
     const {trackerId, trackerCategory, trackerQuestion} = tracker
 
     // insert the tracker into the tracker table
-    await sql`INSERT INTO tracker (tracker_id, tracker_categoty, tracker_question)
-    VALUES ${trackerId}, ${trackerCategory}, ${trackerQuestion}`
+    await sql`INSERT INTO tracker (tracker_id, tracker_category, tracker_question)
+    VALUES (gen_random_uuid(), ${trackerCategory}, ${trackerQuestion})`
 
     // return a message that says 'Tracker successfully posted'
     return 'Tracker successfully posted'
@@ -45,7 +45,7 @@ export async function selectAllTrackers(): Promise<Tracker[]> {
  * @returns <Tracker|null> the tracker that has the trackerId or null if no tracker is found
  */
 
-export async function selectTrackersByTrackerId(trackerId: string): Promise<Tracker | null> {
+export async function selectTrackerByTrackerId(trackerId: string): Promise<Tracker | null> {
     // get the tracker from the tracker table in the database by trackerId
     const rowList = <Tracker[]>await sql`SELECT 
     tracker_id, tracker_category, tracker_question 

@@ -2,7 +2,12 @@ import { Request, Response } from "express";
 import {TrackerSchema} from "./tracker.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {PrivateProfile} from "../profile/profile.model";
-import {insertTracker, selectAllTrackers, selectTrackersByTrackerId, Tracker} from "./tracker.model";
+import {
+    insertTracker,
+    selectAllTrackers,
+    selectTrackerByTrackerId,
+    Tracker
+} from "./tracker.model";
 import {Status} from "../../utils/interfaces/Status";
 import {z} from "zod";
 
@@ -12,13 +17,13 @@ import {z} from "zod";
  * @param response will contain a status object with a message and data if successful or a status with error message and null data if unsuccessful
  */
 
-export async function postTrackerController(request: Request, response: Response): Promise<Response | undefined> {
-    try {
 
+export async function postTrackerController(request: Request, response: Response): Promise<Response> {
+    try {
         // validate the incoming request with the tracker schema
         const validationResult = TrackerSchema.safeParse(request.body)
 
-        // if the validation fails, return a response to the client
+        // if validation fails, return a response to the client
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
         }
@@ -26,25 +31,25 @@ export async function postTrackerController(request: Request, response: Response
         // get tracker data from the request body
         const {trackerId, trackerCategory, trackerQuestion} = validationResult.data
 
-        // get the profile from the session
-        const profile: PrivateProfile = request.session.profile as PrivateProfile
-
+        // get profile from the session
+        // const profile: PrivateProfile = request.session.profile as PrivateProfile
         // set the tracker profile id to the profile id from the session
-        const trackerProfileId: string = profile.profileId as string
+        // const trackerProfileId: string = profile.profileId as string
 
         // insert the tracker into the database and store the result in a variable called result
-        const result = await insertTracker(tracker)
+        const result = await insertTracker({trackerId, trackerCategory, trackerQuestion})
 
         // return the response with the status code 200, a message, and the result as data
         const status: Status = {status: 200, message: result, data: null}
         return response.json(status)
 
-        // if there is an error,  return the response with the status 500, an error message, and null data
+        //if there is an error, return the response with the status 500, an error message, and null data
     } catch (error) {
-        console.log(error)
-        return response.json({status:500, message: 'Error creating tracker. Try again.', data: null})
+        console.error(error)
+        return response.status(500).json({status: 500, message: 'Error creating tracker. Try again.', data: null})
     }
 }
+
 
 /**
  *  get all trackers from the database and returns them to the user in the response
@@ -60,7 +65,7 @@ export async function getAllTrackers (request: Request, response: Response): Pro
 
         // return the response with the status code 200, a message, and the tracker as data
         const status: Status = {status: 200, message: null, data}
-        return response.json{status}
+        return response.json(status)
 
     } catch (error) {
         console.error(error)
@@ -73,13 +78,14 @@ export async function getAllTrackers (request: Request, response: Response): Pro
 }
 
 
+
 /**
  * get all trackers from the database by thread profile id and return them to the user in the response
  * @param request from the client to the server to get all trackers by tracker profile id
  * @param response from the server to the client with all trackers by tracker profile id or an error message
  */
 
-export async function getTrackersByTrackerIdController (request: Request, response: Response): Promise<Response<Status>> {
+export async function getTrackerByTrackerIdController (request: Request, response: Response): Promise<Response<Status>> {
     try {
 
         // validate the incoming request TrackerProfileId with the uuid schema
@@ -94,7 +100,7 @@ export async function getTrackersByTrackerIdController (request: Request, respon
         const trackerId = validationResult.data
 
         //get the tracker from the database by tracker profile id and store it in a variable called data
-        const data = await selectTrackersByTrackerId(trackerId)
+        const data = await selectTrackerByTrackerId(trackerId)
 
         // return the response with the status code 200, a message, and the tracker as data
         return response.json({status:200, message: null, data})
@@ -103,7 +109,7 @@ export async function getTrackersByTrackerIdController (request: Request, respon
     } catch (error) {
         return response.json({
             status: 500,
-            message: '',
+            message: 'Error getting tracker by tracker ID. Try again.',
             data: []
         })
     }
