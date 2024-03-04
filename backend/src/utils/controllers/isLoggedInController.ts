@@ -40,8 +40,9 @@ export function  isSessionActive(request: Request, response: Response, NextFunct
     console.log(request.headers)
     const profile: PublicProfile | undefined = request.session?.profile
     console.log(profile)
+    const status: Status = {status: 401, message: 'Please log in', data: null}
     if (profile === undefined) {
-        return response.json{status: 401, message: 'Please log in', data: null}
+        return response.json(status)
     }
     NextFunction()
 }
