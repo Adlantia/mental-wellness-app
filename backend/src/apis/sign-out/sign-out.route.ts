@@ -1,5 +1,4 @@
 
-// declare a basePath for this router
 import {Router} from "express";
 import {signOutController} from "./sign-out.controller";
 
