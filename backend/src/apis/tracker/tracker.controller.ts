@@ -2,9 +2,15 @@ import { Request, Response } from "express";
 import {TrackerSchema} from "./tracker.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {PrivateProfile} from "../profile/profile.model";
-import {insertTracker, selectAllTrackers} from "./tracker.model";
+import {insertTracker, selectAllTrackers, selectTrackersByTrackerId, Tracker} from "./tracker.model";
 import {Status} from "../../utils/interfaces/Status";
+import {z} from "zod";
 
+/**
+ *
+ * @param request body must contain trackerId, trackerCategory and trackerQuestion
+ * @param response will contain a status object with a message and data if successful or a status with error message and null data if unsuccessful
+ */
 
 export async function postTrackerController(request: Request, response: Response): Promise<Response | undefined> {
     try {
@@ -40,10 +46,67 @@ export async function postTrackerController(request: Request, response: Response
     }
 }
 
+/**
+ *  get all trackers from the database and returns them to the user in the response
+ * @param request from the client to the server to get all trackers
+ * @param response response from the server to the client with all trackers or an error message
+ */
+
 export async function getAllTrackers (request: Request, response: Response): Promise<Response<Status>> {
     try {
 
         // get the trackers from the database and store it in a variable called data
         const data = await selectAllTrackers()
+
+        // return the response with the status code 200, a message, and the tracker as data
+        const status: Status = {status: 200, message: null, data}
+        return response.json{status}
+
+    } catch (error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            message: 'Error getting tracker. Try again.',
+            data: []
+        })
     }
 }
+
+
+/**
+ * get all trackers from the database by thread profile id and return them to the user in the response
+ * @param request from the client to the server to get all trackers by tracker profile id
+ * @param response from the server to the client with all trackers by tracker profile id or an error message
+ */
+
+export async function getTrackersByTrackerIdController (request: Request, response: Response): Promise<Response<Status>> {
+    try {
+
+        // validate the incoming request TrackerProfileId with the uuid schema
+        const validationResult = z.string().uuid({message: 'please provide a valid trackerId'}).safeParse(request.params.trackerId)
+
+        // if the validation fails, return a response to the client
+        if(!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        // get the tracker profile id from the request parameters
+        const trackerId = validationResult.data
+
+        //get the tracker from the database by tracker profile id and store it in a variable called data
+        const data = await selectTrackersByTrackerId(trackerId)
+
+        // return the response with the status code 200, a message, and the tracker as data
+        return response.json({status:200, message: null, data})
+
+        // if there is an error, return the response with the status code 500, an error message, and null data
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
+
+
