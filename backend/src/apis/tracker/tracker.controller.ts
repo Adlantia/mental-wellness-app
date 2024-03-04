@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import {TrackerSchema} from "./tracker.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {PrivateProfile} from "../profile/profile.model";
-import {insertTracker} from "./tracker.model";
+import {insertTracker, selectAllTrackers} from "./tracker.model";
 import {Status} from "../../utils/interfaces/Status";
 
 
@@ -40,3 +40,10 @@ export async function postTrackerController(request: Request, response: Response
     }
 }
 
+export async function getAllTrackers (request: Request, response: Response): Promise<Response<Status>> {
+    try {
+
+        // get the trackers from the database and store it in a variable called data
+        const data = await selectAllTrackers()
+    }
+}
