@@ -24,7 +24,7 @@ export async function createJournal(journal: Journal): Promise<string> {
     const {journalId, journalProfileId, journalDateTime, journalText, journalTitle} = journal
 
     await sql`INSERT INTO journal (journal_id, journal_profile_id, journal_datetime, journal_text, journal_title) 
-              VALUES (${journalId}, ${journalProfileId}, ${journalDateTime}, ${journalText}, ${journalTitle})`
+              VALUES (gen_random_uuid(), ${journalProfileId}, now(), ${journalText}, ${journalTitle})`
 
     return "Journal entry created successfully"
 }

@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import {createJournalController} from "./journal.controller"
 
-const basePath = 'apis/journal'
+const basePath = '/apis/journal'
 
 const router = Router()
 
