@@ -11,8 +11,6 @@ import { PublicProfileSchema } from "./profile.validator";
  * @return {Promise<Resopnse<Status>>} A promise containing response for the client with the requested info
  */
 
-
-
 export async function putProfileController(request:Request, response: Response): Promise<Response<Status>> {
     try {
         //validate updated profile data coming from request body
