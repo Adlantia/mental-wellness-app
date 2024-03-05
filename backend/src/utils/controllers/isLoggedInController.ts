@@ -38,7 +38,7 @@ export function isLoggedInController(request: Request, response: Response, next:
 
 export function  isSessionActive(request: Request, response: Response, NextFunction: NextFunction) : Response | void {
     console.log(request.headers)
-    const status: Status = {status: 401, message: 'Please log in', data: null}
+    const status: Status = {status: 401, message: 'Session has expired, please log in', data: null}
     const profile: PublicProfile | undefined = request.session?.profile
     console.log(profile)
     if (profile === undefined) {
