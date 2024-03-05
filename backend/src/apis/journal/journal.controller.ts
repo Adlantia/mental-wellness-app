@@ -45,7 +45,11 @@ export async function getJournalEntriesController(request: Request, response: Re
     try {
         const data = await getJournalEntries()
 
-        const status: Status = {status: 200, message: null, data}
+        const status: Status = {
+            status: 200,
+            message: null,
+            data
+        }
         return response.json(status)
     } catch (error) {
         console.log(error)

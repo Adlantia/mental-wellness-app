@@ -33,7 +33,6 @@ export async function createJournal(journal: Journal): Promise<string> {
 
 /**
  * Get all journal entries for a profile
- * @param journalProfileId {string} the profile id to get journal entries for user
  * @returns {Promise<Journal[]>} a list of journal entries
  */
 
