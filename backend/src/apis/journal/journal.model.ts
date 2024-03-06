@@ -23,7 +23,7 @@ export type Journal = z.infer<typeof JournalSchema>
 export async function createJournal(journal: Journal): Promise<string> {
     const {journalId, journalProfileId, journalDateTime, journalText, journalTitle} = journal
 
-    await sql`INSERT INTO journal (journal_id, journal_profile_id, journal_datetime, journal_text, journal_title) 
+    await sql`INSERT INTO journal (journal_id, journal_profile_id, journal_date_time, journal_text, journal_title) 
               VALUES (gen_random_uuid(), ${journalProfileId}, now(), ${journalText}, ${journalTitle})`
 
     return "Journal entry created successfully"
@@ -36,7 +36,7 @@ export async function createJournal(journal: Journal): Promise<string> {
  * @returns {Promise<Journal[]>} a list of journal entries
  */
 
-export async function getJournalEntries(): Promise<Journal[]> {
-    const rowList = <Journal[]> await sql`SELECT journal_id, journal_profile_id, journal_datetime,journal_text, journal_title FROM journal`
+export async function selectJournalEntries(): Promise<Journal[]> {
+    const rowList = <Journal[]> await sql`SELECT journal_id, journal_profile_id, journal_date_time,journal_text, journal_title FROM journal`
     return JournalSchema.array().parse(rowList)
 }

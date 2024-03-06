@@ -1,6 +1,6 @@
 import {Request, Response} from "express"
 import {Status} from "../../utils/interfaces/Status"
-import {createJournal, getJournalEntries, Journal} from "./journal.model"
+import {createJournal, Journal, selectJournalEntries} from "./journal.model"
 import {JournalSchema} from "./journal.validator"
 import {zodErrorResponse} from "../../utils/response.utils"
 import {PrivateProfile} from "../profile/profile.model"
@@ -43,7 +43,7 @@ export async function createJournalController(request: Request, response: Respon
 
 export async function getJournalEntriesController(request: Request, response: Response): Promise<Response | undefined> {
     try {
-        const data = await getJournalEntries()
+        const data = await selectJournalEntries()
 
         const status: Status = {
             status: 200,
