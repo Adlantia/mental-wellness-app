@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import {PrivateProfileSchema} from "./profilevalidator";
+import {PrivateProfileSchema, PublicProfileSchema} from "./profile.validator";
 import {sql} from "../../utils/database.utils";
 
 /**
@@ -11,8 +11,15 @@ import {sql} from "../../utils/database.utils";
  *  @property profileName {string} the profile's name
  */
 
-
 export type PrivateProfile = z.infer<typeof PrivateProfileSchema>
+export type PublicProfile = z.infer<typeof PublicProfileSchema>
+
+/**
+ * The shape of the public profile that can be shared with Next.js
+ * @property profileId {string} the primary
+ * @property profileEmail {string|null} the profile's email
+ * @property profileName {string} the profile's name
+ */
 
 export async function insertProfile (profile: PrivateProfile): Promise<string> {
 
@@ -45,4 +52,36 @@ export async function selectPrivateProfileByProfileActivationToken (profileActiv
     return result?.length === 1 ? result[0] : null
 }
 
+/**
+ * Selects the privateProfile from profile table by profileEmail
+ * @param profileEmail - the profile's email to search for
+ * @returns Profile or null if no profile was found
+ */
 
+export async function selectPrivateProfileByProfileEmail(profileEmail: string): Promise<PrivateProfile | null> {
+    //create prepared statement  that selects profile by profileEmail and execute
+    const rowlist = await sql`SELECT profile_id, profile_activation_token, profile_email, profile_hash, profile_name FROM profile WHERE profile_email = ${profileEmail}`
+
+    //enforce that the result is array length one or null
+    const result = PrivateProfileSchema.array().max(1).parse(rowlist)
+
+    //return the profile or null if none found
+    return result?.length === 1 ? result[0] : null
+}
+
+/**
+ * Selects the privateProfile from profile table by profileId
+ * @param profileId the profile's id to search for in the profile table
+ * @returns PrivateProfile or null if no profile was found
+ */
+
+export async function selectPrivateProfileByProfileId(profileId: string): Promise<PrivateProfile | null> {
+    //create prepared statement that selects the profile by profileId and execute statement
+    const rowList = await sql`SELECT profile_id, profile_activation_token, profile_email, profile_hash, profile_name FROM profile WHERE profile_id = ${profileId}`
+
+    //enforce that the result is an array of one profile or null
+    const result = PrivateProfileSchema.array().max(1).parse(rowList)
+
+    //return the profile or null if no profile found
+    return result?.length === 1 ? result[0] : null
+}

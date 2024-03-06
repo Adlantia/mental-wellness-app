@@ -15,7 +15,7 @@ create table if not exists journal (
     journal_id UUID not null primary key,
     journal_profile_id UUID not null,
     foreign key(journal_profile_id) references profile(profile_id),
-    journal_datetime timestamptz,
+    journal_date_time timestamptz,
     journal_text varchar(2048),
     journal_title varchar(64)
 );
