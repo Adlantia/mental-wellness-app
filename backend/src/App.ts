@@ -10,6 +10,7 @@ import {trackerRoute} from "./apis/tracker/tracker.route";
 import {journalRoute} from "./apis/journal/journal.route";
 import {signInRoute} from "./apis/sign-in/sign-in.route";
 import { profileRoute } from './apis/profile/profile.route'
+import {signOutRoute} from "./apis/sign-out/sign-out.route";
 
 // The following class creates the app and instantiates the server
 export class App {
@@ -58,6 +59,7 @@ export class App {
         this.app.use(journalRoute.basePath, journalRoute.router)
         this.app.use(signInRoute.basePath, signInRoute.router)
         this.app.use(profileRoute.basePath, profileRoute.router)
+        this.app.use(signOutRoute.basePath, signOutRoute.router)
 
     }
 
