@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import {TrackerSchema} from "./tracker.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
-import {PrivateProfile} from "../profile/profile.model";
 import {
     insertTracker,
     selectAllTrackers,
@@ -30,11 +29,6 @@ export async function postTrackerController(request: Request, response: Response
 
         // get tracker data from the request body
         const {trackerId, trackerCategory, trackerQuestion} = validationResult.data
-
-        // get profile from the session
-        // const profile: PrivateProfile = request.session.profile as PrivateProfile
-        // set the tracker profile id to the profile id from the session
-        // const trackerProfileId: string = profile.profileId as string
 
         // insert the tracker into the database and store the result in a variable called result
         const result = await insertTracker({trackerId, trackerCategory, trackerQuestion})
