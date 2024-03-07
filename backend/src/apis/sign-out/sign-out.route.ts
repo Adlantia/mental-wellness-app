@@ -2,7 +2,7 @@
 import {Router} from "express";
 import {signOutController} from "./sign-out.controller";
 
-const basePath = '/api/sign-out'
+const basePath = '/apis/sign-out'
 
 const router = Router()
 
