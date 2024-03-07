@@ -1,10 +1,8 @@
 import {Request, Response} from 'express'
 import {
-    deleteLog,
+
     insertLog,
     Log,
-    selectLogByLogId,
-    selectLogsByLogProfileId,
 } from "./log.model";
 import {PublicProfile} from "../profile/profile.model";
 import {Status} from "../../utils/interfaces/Status";
