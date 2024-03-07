@@ -84,18 +84,18 @@ export async function insertLog(log: Log): Promise<string> {
 //     return logSchema.array().parse(rowList)
 // }
 //
-// /**
-//  * selects logs from the log table by logProfileId and returns the logs
-//  * @param logProfileId to be selected by logProfileId
-//  * @returns the logs that were selected
-//  */
-// export async function selectLogsByLogProfileId(logProfileId: string): Promise<log[]> {
-//
-//     // select the logs from the log table by logProfileId
-//     const rowList = <log[]>await sql`SELECT log_profile_id, log_thread_id, log_datetime
-//                                       FROM "log"
-//                                       WHERE log_profile_id = ${logProfileId}`
-//
-//     // parse the result into an array of logs and return it
-//     return logSchema.array().parse(rowList)
-// }
+/**
+ * selects logs from the log table by logProfileId and returns the logs
+ * @param logProfileId to be selected by logProfileId
+ * @returns the logs that were selected
+ */
+export async function selectLogsByLogProfileId(logProfileId: string): Promise<Log[]> {
+
+    // select the logs from the log table by logProfileId
+    const rowList = <Log[]>await sql`SELECT log_id, log_profile_id,log_tracker_id,log_answer, log_datetime
+                                      FROM log
+                                      WHERE log_profile_id = ${logProfileId}`
+            console.log(rowList)
+    // parse the result into an array of logs and return it
+    return LogSchema.array().parse(rowList)
+}

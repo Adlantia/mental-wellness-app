@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { isLoggedInController } from "../../utils/controllers/isLoggedInController"
+import { isLoggedInController } from "../../utils/controllers/isLoggedIn.controller"
 import { putProfileController } from "./profile.controller"
 
 

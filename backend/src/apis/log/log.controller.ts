@@ -1,8 +1,7 @@
 import {Request, Response} from 'express'
 import {
-
     insertLog,
-    Log,
+    Log, selectLogsByLogProfileId,
 } from "./log.model";
 import {PublicProfile} from "../profile/profile.model";
 import {Status} from "../../utils/interfaces/Status";
@@ -97,44 +96,52 @@ export async function postLogController (request:Request, response:Response) : P
 //
 //
 // /**
-//  * Handles GET request for all logs associated with a profile
-//  * @param request object containing the log profile id
-//  * @param response object containing the status of the request and the logs associated with the profile
-//  * @returns status object containing the status of the request and the logs associated with the profile
-//  */
-//
-//
-//
-// export async function getLogsByLogProfileIdController (request: Request, response: Response) :Promise <Response> {
-//     try{
-//         //validate the logProfileId coming from the request parameters
-//         const validationResult = z.string().uuid("Please provide a valid logProfileId").safeParse(request.params.logProfileId)
-//
-//         //if the validation fails, return a response to the client
-//         if(!validationResult.success) {
-//             return zodErrorResponse(response, validationResult.error)
-//         }
-//
-//         //if validation succeeds, continue
-//
-//         //deconstruct the log Profile id from the request parameters
-//         const logProfileId = validationResult.data
-//
-//         //select the logs by log profile id
-//         const data =  await selectLogsByLogProfileId(logProfileId)
-//
-//         //return the status and the logs associated with the profile
-//         return response.json({status:200, message:null, data})
-//
-//         //if an error occurs, return the error to the user
-//     }   catch (error) {
-//         return response.json({
-//             status: 500,
-//             message:'',
-//             data: []
-//         })
-//     }
-// }
+ /** Handles GET request for all logs associated with a profile
+ * @param request object containing the log profile id
+ * @param response object containing the status of the request and the logs associated with the profile
+ * @returns status object containing the status of the request and the logs associated with the profile
+ */
+
+
+
+export async function getLogsByLogProfileIdController (request: Request, response: Response) :Promise <Response> {
+    try{
+        // //validate the logProfileId coming from the request parameters
+        // const validationResult = z.string().uuid("Please provide a valid logProfileId").safeParse(request.params.logProfileId)
+        //
+        // //if the validation fails, return a response to the client
+        // if(!validationResult.success) {
+        //     return zodErrorResponse(response, validationResult.error)
+        // }
+
+        //if validation succeeds, continue
+
+        //deconstruct the log Profile id from the request parameters
+        //const logProfileId = validationResult.data
+        //deconstruct the log ids from the validation result
+    //    const {logAnswer, logTrackerId} = validationResult.data
+
+        //deconstruct the profile from the session
+        const profile = request.session.profile as PublicProfile
+
+        //deconstruct the profile id from the profile
+        const logProfileId = profile.profileId as string
+        console.log(logProfileId)
+        //select the logs by log profile id
+        const data =  await selectLogsByLogProfileId(logProfileId)
+
+        //return the status and the logs associated with the profile
+        return response.json({status:200, message:null, data})
+
+        //if an error occurs, return the error to the user
+    }   catch (error) {
+        return response.json({
+            status: 500,
+            message:'',
+            data: []
+        })
+    }
+}
 // /**
 //  * Handles DELETE request to delete a log from the log table
 //  * @param request object containing the log thread id

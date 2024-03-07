@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
-import {postLogController} from "./log.controller";
+import {getLogsByLogProfileIdController, postLogController} from "./log.controller";
 
 
 // declare a basePath for this router
@@ -22,8 +22,8 @@ router.route('/')
 //     .get(getLogsByLogThreadIdController)
 //     .delete(isLoggedInController, deleteLogController)
 //
-// router.route('/profileId/:profileId')
-//     .get(getLogsByLogProfileIdController)
+router.route('/')
+    .get(isLoggedInController, getLogsByLogProfileIdController)
 
 // export the router with the basePath and router object
 export const logRoute = {basePath, router}

@@ -1,7 +1,7 @@
 
 import {Router} from "express";
 import { getAllTrackers, getTrackerByTrackerIdController, postTrackerController } from "./tracker.controller";
-import {isLoggedInController} from "../../utils/controllers/isLoggedInController";
+import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
 
 // declare a basePath for this router
