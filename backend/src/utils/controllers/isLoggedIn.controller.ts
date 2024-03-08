@@ -5,7 +5,7 @@ import { PublicProfile } from "../../apis/profile/profile.model";
 
 export function isLoggedInController(request: Request, response: Response, next: NextFunction): Response | void {
     //set a predefined response if the user is not logged in
-    const status: Status = {status: 401, message: 'Please log in', data: null}
+    const status: Status = {status: 401, message: 'Please Login', data: null}
     try {
         //get the profile from the session
         const profile: PublicProfile | undefined = request.session?.profile
@@ -15,6 +15,8 @@ export function isLoggedInController(request: Request, response: Response, next:
 
         //get the unparsed jwt token from request header
         const unverifiedJwtToken: string | undefined = request.headers?.authorization
+
+
 
         //if the profile signature or jwt token are undefined, return predefined status
         if (profile === undefined || signature === undefined || unverifiedJwtToken === undefined) {
