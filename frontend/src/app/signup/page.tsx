@@ -1,6 +1,53 @@
+"use client";
+
 import React from "react";
+import {Formik, FormikHelpers} from "formik";
+import {toFormikValidationSchema} from "zod-formik-adapter";
+
+
+export function SignUpForm() {
+
+    const initialValues : SignUp = {
+        profileName: '',
+        profileEmail: '',
+        profilePassword: '',
+        profilePasswordConfirm: ''
+    }
+
+    const handleSubmit = (values: signUp, actions: FormikHelpers<SignUp>) => {
+        const {setStatus, resetForm} = actions
+        fetch('/apis/sign-up', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values)
+        }).then(response => response.json())
+            .then(json => {
+                let type = 'alert alert-danger'
+                if(json.status === 200) {
+                    resetForm()
+                    type = 'alert alert-success'
+                }
+                setStatus({type, message: json.message})
+            })
+    }
+
+    return(
+        <>
+            <Formik
+                initialValues={initialValues}
+                onSubmit={handleSubmit}
+                validationSchema={toFormikValidationSchema(SignUpSchema)}
+            >
+                {SignInFormContent}
+            </Formik>
+        </>
+    )
+}
 
 export default function Signup() {
+
    return (
        <>
            <div className="flex justify-center items-center h-screen">
