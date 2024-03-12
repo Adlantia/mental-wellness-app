@@ -2,7 +2,7 @@
 
 import {Journal, JournalSchema} from "@/utils/models/journal.model";
 
-export async function fetchJournalEntries(): Promise<Journal> {
+export async function fetchAllJournals(): Promise<Journal[]> {
     const {data} = await fetch(`&{proceses.env.REST_API_URL}/apis/journal`)
         .then(response => {
             if(!response.ok) {
@@ -13,4 +13,4 @@ export async function fetchJournalEntries(): Promise<Journal> {
         })
 }
 
-// return JournalSchema.parse(data)
+return JournalSchema.parse(data)

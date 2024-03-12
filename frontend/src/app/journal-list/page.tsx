@@ -1,5 +1,9 @@
+'use server'
+
 import {Journal} from "@/app/shared/Journal";
-import {fetchJournalEntries} from "@/utils/http/journal.http";
+import {fetchAllJournals} from "@/utils/http/journal.http";
+import {Profile} from "@/utils/models/profile.model";
+// import {Journal} from "@/utils/models/journal.model";
 
 export default function JournalList() {
     const journals = [
@@ -48,10 +52,13 @@ export default function JournalList() {
         </>
     )
 
-    async function getData(): Promise<Journal[]> {
-        const journal = await fetchJournalEntries()
+    async function getData(): Promise<{ profiles: {[profileId: string ]: Profile}, journals: Journal[]}> {
+        const journal = await fetchAllJournals()
+        let profiles : {[ profileId: string ]: Profile} = {}
+
         for(let journal of journals) {
 
         }
+
     }
 }
