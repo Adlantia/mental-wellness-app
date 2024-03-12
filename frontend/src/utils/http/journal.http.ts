@@ -12,4 +12,5 @@ export async function fetchJournalEntries(): Promise<Journal> {
             }
         })
 }
-return JournalSchema.parse(data)
+
+// return JournalSchema.parse(data)

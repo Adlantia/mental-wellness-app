@@ -1,4 +1,5 @@
 import {Journal} from "@/app/shared/Journal";
+import {fetchJournalEntries} from "@/utils/http/journal.http";
 
 export default function JournalList() {
     const journals = [
@@ -46,4 +47,11 @@ export default function JournalList() {
 
         </>
     )
+
+    async function getData(): Promise<Journal[]> {
+        const journal = await fetchJournalEntries()
+        for(let journal of journals) {
+
+        }
+    }
 }
