@@ -4,18 +4,20 @@ import React from "react";
 import {Formik, FormikHelpers, FormikProps} from "formik";
 import {toFormikValidationSchema} from "zod-formik-adapter";
 import {SignUp, SignUpSchema} from "@/utils/models/profile.model";
+import {DisplayError} from "@/app/components/displayError";
+import {DisplayStatus} from "@/app/components/displayStatus";
 
 
 export function SignUpForm() {
 
     const initialValues : SignUp = {
-        profileName: '',
+        profileName:  '',
         profileEmail: '',
         profilePassword: '',
         profilePasswordConfirm: ''
     }
 
-    const handleSubmit = (values: signUp, actions: FormikHelpers<SignUp>) => {
+    const handleSubmit = (values: SignUp, actions: FormikHelpers<SignUp>) => {
         const {setStatus, resetForm} = actions
         fetch('/apis/signup', {
             method: "POST",
@@ -41,7 +43,6 @@ export function SignUpForm() {
                 onSubmit={handleSubmit}
                 validationSchema={toFormikValidationSchema(SignUpSchema)}
             >
-                {SignInFormContent}
             </Formik>
         </>
     )
@@ -57,7 +58,6 @@ export default function Signup(props: FormikProps<SignUp>) {
         handleChange,
         handleBlur,
         handleSubmit,
-        handleReset
 
     } = props;
 
@@ -139,5 +139,5 @@ export default function Signup(props: FormikProps<SignUp>) {
            </div>
 
        </>
-   )
+    )
 }
