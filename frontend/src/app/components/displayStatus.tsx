@@ -18,4 +18,5 @@ export function DisplayStatus(props: DisplayStatusProps) {
             </>
         )
     }
+    return <></>
 }

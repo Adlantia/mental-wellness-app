@@ -27,7 +27,7 @@ export const ProfileSchema = z.object({
 
 export const SignInSchema = z.object({
     profileEmail: z
-        .string({required_error: "profileEmail is required", invalid_type_error: "please provide a valid profile email"})
+        .string({required_error: "profile Email is required", invalid_type_error: "please provide a valid profile email"})
         .email({message: 'please provide a valid email'})
         .max(128, {message: 'please provide a valid email (max 128 characters)'}),
 

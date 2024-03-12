@@ -6,11 +6,13 @@ import {toFormikValidationSchema} from "zod-formik-adapter";
 import {SignUp, SignUpSchema} from "@/utils/models/profile.model";
 import {DisplayError} from "@/app/components/displayError";
 import {DisplayStatus} from "@/app/components/displayStatus";
+import {FormDebugger} from "@/app/components/formDebugger";
 
 
-export function SignUpForm() {
+export default function SignUpForm() {
 
     const initialValues : SignUp = {
+        profileId: '',
         profileName:  '',
         profileEmail: '',
         profilePassword: '',
@@ -43,12 +45,13 @@ export function SignUpForm() {
                 onSubmit={handleSubmit}
                 validationSchema={toFormikValidationSchema(SignUpSchema)}
             >
+                {SignupFormContent}
             </Formik>
         </>
     )
 }
 
-export default function Signup(props: FormikProps<SignUp>) {
+function SignupFormContent(props: FormikProps<SignUp>) {
 
     const {
         status,
@@ -71,16 +74,16 @@ export default function Signup(props: FormikProps<SignUp>) {
                         <hr className="mt-3"></hr>
 
                    <form onSubmit={handleSubmit}>
-                           <div className="flex justify-between">
-                               <label htmlFor="Name"></label>
+                           <div className="mt-5">
+                               <label htmlFor="profileName"></label>
                                <input placeholder="Name"
-                                      className="border border-gray-400 py-1 w-full rounded"
+                                      className="border border-gray-400 py-1 px-2 w-full rounded"
                                       onBlur={handleBlur}
                                       onChange={handleChange}
-                                      // value={values.profileName}
+                                       value={values.profileName}
                                       type="text"
-                                      name="Name"
-                                      id="firstName"
+                                      name="profileName"
+                                      id="profileName"
                                />
                                <DisplayError errors={errors} touched={touched} field={"profileName"} />
                        </div>
@@ -91,7 +94,7 @@ export default function Signup(props: FormikProps<SignUp>) {
                                     className="border border-gray-400 py-1 px-2 w-full rounded"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    // value={values.profileEmail}
+                                     value={values.profileEmail}
                                     type="text"
                                     name="profileEmail"
                                     id="profileEmail"
@@ -129,12 +132,13 @@ export default function Signup(props: FormikProps<SignUp>) {
                             <DisplayError errors={errors} touched={touched} field={"profilePasswordConfirm"} />
                         </div>
 
-                        </div>
                        <div className="mt-5">
                            <button className="btn btn-success border-indigo-700 bg-indigo-700 text-white w-full py-3 rounded-md hover:bg-transparent hover:text-indigo-700 font-semi-bold">Register</button>
                        </div>
                         <DisplayStatus status={status} />
                    </form>
+                   {/*<FormDebugger  {...props}/>*/}
+
                </div>
            </div>
 
