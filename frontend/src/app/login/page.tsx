@@ -1,7 +1,54 @@
+"use client";
+
 import React from "react";
+import {SignIn, SignInSchema} from "@/utils/models/profile.model";
+import {Formik, FormikHelpers, FormikProps} from "formik";
+import {toFormikValidationSchema} from "zod-formik-adapter";
 
 
-export default function Signin() {
+export default function SignInForm() {
+
+    const initialValues : SignIn = {
+        profileEmail: '',
+        profilePassword: '',
+    }
+
+    const handleSubmit = (values: SignIn, actions: FormikHelpers<SignIn>) => {
+        const {setStatus, resetForm} = actions
+        fetch('apis/login', {
+            method: "POST",
+            headers: {
+                    "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values)
+        }).then(response => response.json())
+            .then(json => {
+                let type = 'alert alert-danger'
+                if(json.status === 200) {
+                    resetForm()
+                    type = 'alert alert-success'
+                }
+                setStatus({type, message: json.message})
+            })
+    }
+
+    return(
+        <>
+            <Formik
+                initialValues={initialValues}
+                onSubmit={handleSubmit}
+                validationSchema={toFormikValidationSchema(SignInSchema)}
+                >
+                {SignInFormContent}
+            </Formik>
+
+        </>
+    )
+}
+
+
+
+export function SignInFormContent(props: FormikProps<SignIn>) {
     return (
         <>
             <div className="flex justify-center items-center h-screen">
