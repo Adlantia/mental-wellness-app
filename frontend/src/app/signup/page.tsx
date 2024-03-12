@@ -3,6 +3,7 @@
 import React from "react";
 import {Formik, FormikHelpers, FormikProps} from "formik";
 import {toFormikValidationSchema} from "zod-formik-adapter";
+import {SignUp, SignUpSchema} from "@/utils/models/profile.model";
 
 
 export function SignUpForm() {
