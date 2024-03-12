@@ -71,14 +71,14 @@ export default function Signup(props: FormikProps<SignUp>) {
 
                    <form onSubmit={handleSubmit}>
                            <div className="flex justify-between">
-                               <label htmlFor="First name"></label>
-                               <input placeholder="First name"
+                               <label htmlFor="Name"></label>
+                               <input placeholder="Name"
+                                      className="border border-gray-400 py-1 w-full rounded"
                                       onBlur={handleBlur}
                                       onChange={handleChange}
                                       // value={values.profileName}
-                                      className="border border-gray-400 py-1 w-full rounded"
                                       type="text"
-                                      name="firstName"
+                                      name="Name"
                                       id="firstName"
                                />
                                <DisplayError errors={errors} touched={touched} field={"profileName"} />
@@ -87,10 +87,10 @@ export default function Signup(props: FormikProps<SignUp>) {
                          <div className="mt-5">
                              <label htmlFor="email"></label>
                              <input placeholder="Email" required
+                                    className="border border-gray-400 py-1 px-2 w-full rounded"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
                                     // value={values.profileEmail}
-                                    className="border border-gray-400 py-1 px-2 w-full rounded"
                                     type="text"
                                     name="profileEmail"
                                     id="profileEmail"
@@ -101,30 +101,38 @@ export default function Signup(props: FormikProps<SignUp>) {
 
                         <div className="mt-5 ">
                             <label htmlFor="password"></label>
-                            <input type="password" className="border border-gray-400 py-1 px-2 w-full rounded"
-                                                     placeholder="Password" required
+                            <input
+                                placeholder="Password" required
+                                   className="border border-gray-400 py-1 px-2 w-full rounded"
                                    onBlur={handleBlur}
                                    onChange={handleChange}
-
-
+                                   value={values.profilePassword}
+                                   type="password"
+                                   name="profilePassword"
+                                   id="password"
                             />
+                            <DisplayError errors={errors} touched={touched} field={"profilePassword"} />
                          </div>
-
 
                         <div className="mt-5 ">
                            <label htmlFor="confirm password"></label>
-                           <input type="password" className="border border-gray-400 py-1 px-2 w-full rounded" placeholder="Confirm Password" required/>
+                           <input   placeholder="Confirm Password" required
+                                    className="border border-gray-400 py-1 px-2 w-full rounded"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.profilePasswordConfirm}
+                                    type="password"
+                                    name="profilePasswordConfirm"
+                                    id="passwordConfirm"
+                           />
+                            <DisplayError errors={errors} touched={touched} field={"profilePasswordConfirm"} />
                         </div>
-                        <div className="mt-5">
-                           <label htmlFor="checkbox"></label>
-                           {/*<input type="checkbox" className="border border-gray-400 rounded"/>*/}
-                           {/*  <span className="pl-2">*/}
-                           {/*    I accept the <a href="#" className="text-purple-500 font-semibold">Terms of Use</a>*/}
-                           {/*  </span>*/}
+
                         </div>
                        <div className="mt-5">
-                           <button className="border-indigo-700 bg-indigo-700 text-white w-full py-3 rounded-md hover:bg-transparent hover:text-indigo-700 font-semi-bold">Register</button>
+                           <button className="btn btn-success border-indigo-700 bg-indigo-700 text-white w-full py-3 rounded-md hover:bg-transparent hover:text-indigo-700 font-semi-bold">Register</button>
                        </div>
+                        <DisplayStatus status={status} />
                    </form>
                </div>
            </div>
