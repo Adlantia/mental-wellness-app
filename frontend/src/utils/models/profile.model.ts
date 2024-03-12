@@ -15,11 +15,6 @@ export const ProfileSchema = z.object({
         .max(128, {message: 'profile email length is too long'}),
 
 
-    profileHash: z.string({
-        required_error: 'profileHash is required',
-        invalid_type_error: 'please provide a valid profileHash'
-    })
-        .length(97, {message: 'profile hash must be 97 characters'}),
 
     profileName: z.string({
         required_error: 'profile name is required',
@@ -48,7 +43,7 @@ export const SignUpSchema = ProfileSchema
         profileName: z
             .string({required_error: "Profile Name is required"})
             .min(1, {message: 'please provide a valid profile name (min 1 characters'})
-            .max(32, {message: 'please provide a valid profile name (max 32 characters'})
+            .max(32, {message: 'please provide a valid profile name (max 32 characters'}),
         profilePasswordConfirm: z
             .string({required_error: "profile password is required", invalid_type_error: "please provide a valid password"})
             .min(8, {message: 'please provide a valid password (min 8 characters)'})
@@ -59,4 +54,6 @@ export const SignUpSchema = ProfileSchema
         message: 'passwords do not match'
     })
 
-
+export type Profile = z.infer<typeof ProfileSchema>
+export type SignIn = z.infer<typeof SignInSchema>
+export type SignUp = z.infer<typeof SignUpSchema>
