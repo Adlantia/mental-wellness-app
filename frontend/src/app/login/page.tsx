@@ -113,7 +113,7 @@ export function SignInFormContent(props: FormikProps<SignIn>) {
                     </div>
                         <DisplayStatus status={status} />
                     </form>
-                    <FormDebugger {...props}/>
+                    {/*<FormDebugger {...props}/>*/}
 
                 </div>
             </div>
