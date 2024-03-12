@@ -30,10 +30,24 @@ export const ProfileSchema = z.object({
         .max(32, {message: 'please provide a valid profile name (max 32 characters)'})
 })
 
+export const SignInSchema = z.object({
+    profileEmail: z
+        .string({required_error: "profileEmail is required", invalid_type_error: "please provide a valid profile email"})
+        .email({message: 'please provide a valid email'})
+        .max(128, {message: 'please provide a valid email (max 128 characters)'}),
+
+    profilePassword: z
+        .string({required_error: "profile password is required", invalid_type_error: "please provide a valid password"})
+        .min(8, {message: 'please provide a valid password (min 8 characters)'})
+        .max(32, {message: 'please provide a valid password (max 32 characters)'}),
+})
+
 export const SignUpSchema = ProfileSchema
+    .merge(SignInSchema)
     .extend({
         profileName: z
             .string({required_error: "Profile Name is required"})
             .min(1, {message: 'please provide a valid profile name (min 1 characters'})
             .max(32, {message: 'please provide a valid profile name (max 32 characters'})
     })
+
