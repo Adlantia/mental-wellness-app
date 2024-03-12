@@ -16,7 +16,7 @@ router.route('/')
     .post(isLoggedInController, postTrackerController)
     .get(getAllTrackers);
 
-router.route('/trackerId')
+router.route('/:trackerId')
     .get(getTrackerByTrackerIdController)
 
 
