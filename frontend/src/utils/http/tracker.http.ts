@@ -3,7 +3,7 @@
 import {Tracker, TrackerSchema} from "@/utils/models/tracker.model";
 
 export async function fetchAllTrackers(): Promise<Tracker[]>{
-    const {data} = await fetch(`${process.env.REST_API_URL}/apis/tracker`)
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/tracker`)
         .then((response:Response) => {
             if(!response.ok) {
                 throw new Error('Error fetching trackers')
@@ -15,7 +15,7 @@ export async function fetchAllTrackers(): Promise<Tracker[]>{
 }
 
 export async function fetchTrackerByTrackerId(trackerId:string): Promise<Tracker>{
-    const {data} = await fetch(`${process.env.REST_API_URL}/apis/tracker/${trackerId}`)
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/tracker/${trackerId}`)
         .then((response:Response) => {
             if(!response.ok) {
                 throw new Error('Error fetching tracker')

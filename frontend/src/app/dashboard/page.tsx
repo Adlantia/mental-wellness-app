@@ -10,8 +10,7 @@ export default async function Dashboard () {
         <>
             <section className="container mx-auto py-12">
                 {trackers.map(tracker => <LogButton link = {`/log/${tracker.trackerId}`} name= {tracker.trackerCategory} />)}
-                <LogButton link = "/mood" name="Mood" />
-                <LogButton link = "/sleep" name="Sleep"/>
+
                 <LogButton link = "/journal" name= "Journal" />
             </section>
 
