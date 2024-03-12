@@ -49,5 +49,14 @@ export const SignUpSchema = ProfileSchema
             .string({required_error: "Profile Name is required"})
             .min(1, {message: 'please provide a valid profile name (min 1 characters'})
             .max(32, {message: 'please provide a valid profile name (max 32 characters'})
+        profilePasswordConfirm: z
+            .string({required_error: "profile password is required", invalid_type_error: "please provide a valid password"})
+            .min(8, {message: 'please provide a valid password (min 8 characters)'})
+            .max(32, {message: 'please provide a valid password (max 32 characters)'})
     })
+
+    .refine(data => data.profilePassword === data.profilePasswordConfirm, {
+        message: 'passwords do not match'
+    })
+
 
