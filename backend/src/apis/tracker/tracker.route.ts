@@ -11,12 +11,12 @@ const basePath = '/apis/tracker'
 const router = Router()
 
 
-// define tracker route for this router
+// define log route for this router
 router.route('/')
     .post(isLoggedInController, postTrackerController)
     .get(getAllTrackers);
 
-router.route('/trackerId')
+router.route('/:trackerId')
     .get(getTrackerByTrackerIdController)
 
 
