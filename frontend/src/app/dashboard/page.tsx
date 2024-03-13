@@ -5,7 +5,7 @@ import {fetchAllTrackers} from "@/utils/http/tracker.http";
 
 export default async function Dashboard () {
     const trackers =  await getData()
-    console.log(trackers)
+    // console.log(trackers)
     return (
         <>
             <section className="container mx-auto py-12">

@@ -16,7 +16,7 @@ export default async function Page({params}: {params: {trackerId: string}})  {
                 <RatingScale />
                 <div className = 'flex justify-center gap-4 my-6'>
                     <SubmitButton buttonName = 'Submit' />
-                    <SubmitButton buttonName = 'Skip' />
+                    {/* <SubmitButton buttonName = 'Skip' /> */}
                 </div>
             </section>
     )
