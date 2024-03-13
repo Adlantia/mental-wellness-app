@@ -3,7 +3,7 @@
 import {RatingScale} from "@/app/RatingScale";
 import {SubmitButton} from "@/app/SubmitButton";
 import {Tracker} from "@/utils/models/tracker.model";
-import { fetchTrackerByTrackerId} from "@/utils/http/tracker.http";
+import {fetchTrackerByTrackerId} from "@/utils/http/tracker.http";
 
 
 export default async function Page({params}: {params: {trackerId: string}})  {
