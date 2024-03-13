@@ -2,8 +2,8 @@
 
 import {Journal, JournalSchema} from "@/utils/models/journal.model";
 
-export async function fetchAllJournals(): Promise<Journal[]> {
-    const {data} = await fetch(`&{proceses.env.REST_API_URL}/apis/journal`)
+export async function fetchAllJournals(): Promise<Journal[]>{
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/journal`)
         .then(response => {
             if(!response.ok) {
                 throw new Error(`error fetching journals`)
@@ -11,6 +11,17 @@ export async function fetchAllJournals(): Promise<Journal[]> {
                 return response.json()
             }
         })
+    return JournalSchema.array().parse(data)
 }
 
-return JournalSchema.parse(data)
+export async function fetchAllJournalByJournalId(): Promise<Journal>{
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/journal`)
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`error fetching journal`)
+            } else {
+                return response.json()
+            }
+        })
+    return JournalSchema.parse(data)
+}

@@ -1,4 +1,4 @@
-'use server'
+
 
 import {Journal} from "@/app/shared/Journal";
 import {fetchAllJournals} from "@/utils/http/journal.http";
