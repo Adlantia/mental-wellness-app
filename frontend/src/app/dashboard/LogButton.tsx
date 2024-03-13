@@ -1,9 +1,9 @@
-type LogButtonProps = {buttonName: string}
+type LogButtonProps = {link: string, name:string}
 
-export function LogButton ({buttonName}: LogButtonProps) {
+export function LogButton ({link, name}: LogButtonProps) {
     return (
         <div className="bg-base-100 rounded-md p-16 w-96 flex gap-3 my-4 mx-auto justify-between">
-            <h2 className="text-6xl text-center text-blue-700">{buttonName} </h2>
+            <h2 className="text-6xl text-center text-blue-700"><a href={`${link}`}>{name}</a> </h2>
 
             <button
                 className="bg-blue-600 rounded-full p-4 text-white hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-950">

@@ -5,7 +5,7 @@ import {z} from 'zod'
  * @property logId {string} the primary key
  * @property logProfileId {string} the foreign key
  * @property logTrackerId {string} the foreign key
- * @property logAnswer {string} the answer to tracker questions
+ * @property logAnswer {string} the answer to log questions
  * @property logDatetime {Date} the date and time the log was posted
  */
 export const LogSchema = z.object({

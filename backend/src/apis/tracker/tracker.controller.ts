@@ -19,7 +19,7 @@ import {z} from "zod";
 
 export async function postTrackerController(request: Request, response: Response): Promise<Response> {
     try {
-        // validate the incoming request with the tracker schema
+        // validate the incoming request with the log schema
         const validationResult = TrackerSchema.safeParse(request.body)
 
         // if validation fails, return a response to the client
@@ -27,10 +27,10 @@ export async function postTrackerController(request: Request, response: Response
             return zodErrorResponse(response, validationResult.error)
         }
 
-        // get tracker data from the request body
+        // get log data from the request body
         const {trackerId, trackerCategory, trackerQuestion} = validationResult.data
 
-        // insert the tracker into the database and store the result in a variable called result
+        // insert the log into the database and store the result in a variable called result
         const result = await insertTracker({trackerId, trackerCategory, trackerQuestion})
 
         // return the response with the status code 200, a message, and the result as data
@@ -40,7 +40,7 @@ export async function postTrackerController(request: Request, response: Response
         //if there is an error, return the response with the status 500, an error message, and null data
     } catch (error) {
         console.error(error)
-        return response.status(500).json({status: 500, message: 'Error creating tracker. Try again.', data: null})
+        return response.status(500).json({status: 500, message: 'Error creating log. Try again.', data: null})
     }
 }
 
@@ -57,7 +57,7 @@ export async function getAllTrackers (request: Request, response: Response): Pro
         // get the trackers from the database and store it in a variable called data
         const data = await selectAllTrackers()
 
-        // return the response with the status code 200, a message, and the tracker as data
+        // return the response with the status code 200, a message, and the log as data
         const status: Status = {status: 200, message: null, data}
         return response.json(status)
 
@@ -65,7 +65,7 @@ export async function getAllTrackers (request: Request, response: Response): Pro
         console.error(error)
         return response.json({
             status: 500,
-            message: 'Error getting tracker. Try again.',
+            message: 'Error getting log. Try again.',
             data: []
         })
     }
@@ -75,8 +75,8 @@ export async function getAllTrackers (request: Request, response: Response): Pro
 
 /**
  * get all trackers from the database by thread profile id and return them to the user in the response
- * @param request from the client to the server to get all trackers by tracker profile id
- * @param response from the server to the client with all trackers by tracker profile id or an error message
+ * @param request from the client to the server to get all trackers by log profile id
+ * @param response from the server to the client with all trackers by log profile id or an error message
  */
 
 export async function getTrackerByTrackerIdController (request: Request, response: Response): Promise<Response<Status>> {
@@ -90,20 +90,20 @@ export async function getTrackerByTrackerIdController (request: Request, respons
             return zodErrorResponse(response, validationResult.error)
         }
 
-        // get the tracker profile id from the request parameters
+        // get the log profile id from the request parameters
         const trackerId = validationResult.data
 
-        //get the tracker from the database by tracker profile id and store it in a variable called data
+        //get the log from the database by log profile id and store it in a variable called data
         const data = await selectTrackerByTrackerId(trackerId)
 
-        // return the response with the status code 200, a message, and the tracker as data
+        // return the response with the status code 200, a message, and the log as data
         return response.json({status:200, message: null, data})
 
         // if there is an error, return the response with the status code 500, an error message, and null data
     } catch (error) {
         return response.json({
             status: 500,
-            message: 'Error getting tracker by tracker ID. Try again.',
+            message: 'Error getting log by log ID. Try again.',
             data: []
         })
     }
