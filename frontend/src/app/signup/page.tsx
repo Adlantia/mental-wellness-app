@@ -39,7 +39,7 @@ export default function SignUpForm() {
     }
 
     return(
-        <>
+        <>-
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
