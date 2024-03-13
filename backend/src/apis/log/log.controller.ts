@@ -106,21 +106,6 @@ export async function postLogController (request:Request, response:Response) : P
 
 export async function getLogsByLogProfileIdController (request: Request, response: Response) :Promise <Response> {
     try{
-        // //validate the logProfileId coming from the request parameters
-        // const validationResult = z.string().uuid("Please provide a valid logProfileId").safeParse(request.params.logProfileId)
-        //
-        // //if the validation fails, return a response to the client
-        // if(!validationResult.success) {
-        //     return zodErrorResponse(response, validationResult.error)
-        // }
-
-        //if validation succeeds, continue
-
-        //deconstruct the log Profile id from the request parameters
-        //const logProfileId = validationResult.data
-        //deconstruct the log ids from the validation result
-    //    const {logAnswer, logTrackerId} = validationResult.data
-
         //deconstruct the profile from the session
         const profile = request.session.profile as PublicProfile
 
@@ -142,57 +127,6 @@ export async function getLogsByLogProfileIdController (request: Request, respons
         })
     }
 }
-// /**
-//  * Handles DELETE request to delete a log from the log table
-//  * @param request object containing the log thread id
-//  * @param response object containing the status of the request
-//  * @returns status object indicating if the log was deleted
-//  */
-// export async function deleteLogController(request: Request, response: Response): Promise <Response<Status>> {
-//     try {
-//         //validate the incoming request with the log schema
-//         const validationResult =  LogSchema.safeParse(request.body)
-//
-//         //if the validation fails, return a response to the client
-//         if(!validationResult.success) {
-//             return zodErrorResponse(response, validationResult.error)
-//         }
-//         //if the validation succeeds, continue
-//         //deconstruct the log  id from the validation result
-//         const {logId} = validationResult.data
-//
-//         //deconstruct the profile from the session
-//         const profile = request.session.profile as PublicProfile
-//
-//         //deconstruct the profile id from the profile
-//         const logProfileId = profile.profileId as string
-//
-//         //create a log object
-//         const log: Log = {
-//             logProfileId,
-//             logId, logDateTime : null
-//         }
-//         // create a status object
-//         const status: Status = {
-//             status: 200,
-//             message: '',
-//             data: null
-//         }
-//
-//         //delete the log from the log table
-//         status.message  = await deleteLog(log)
-//
-//         //return the status to the use
-//         return response.json(status)
-//
-//         //if an error occurs, return the error to the user
-//     } catch (error:any) {
-//         return (response.json({
-//             status: 500,
-//             data:null,
-//             message: error.message
-//         }))
-//     }
-// }
 
-
+//
+//

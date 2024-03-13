@@ -40,3 +40,14 @@ export async function selectJournalEntries(): Promise<Journal[]> {
     const rowList = <Journal[]> await sql`SELECT journal_id, journal_profile_id, journal_date_time,journal_text, journal_title FROM journal`
     return JournalSchema.array().parse(rowList)
 }
+
+export async function selectJournalsByJournalProfileId(journalProfileId: string): Promise<Journal[]> {
+
+    // select the journal from the journal table by journalProfileId
+    const rowList = <Journal[]>await sql`SELECT journal_id, journal_profile_id, journal_date_time,journal_text, journal_title
+                                      FROM journal
+                                      WHERE journal_profile_id = ${journalProfileId}`
+    console.log(rowList)
+    // parse the result into an array of journal entries and return it
+    return JournalSchema.array().parse(rowList)
+}
