@@ -40,6 +40,11 @@ export const SignInSchema = z.object({
 export const SignUpSchema = ProfileSchema
     .merge(SignInSchema)
     .extend({
+        profileId: z.string({
+            required_error: 'profileId is required',
+            invalid_type_error: 'Please provide a valid profileId'
+        })
+            .uuid({message: 'please provide a valid profileId'}).nullable(),
         profileName: z
             .string({required_error: "Profile Name is required"})
             .min(1, {message: 'please provide a valid profile name (min 1 characters'})
