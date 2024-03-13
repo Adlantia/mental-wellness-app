@@ -5,7 +5,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 noStore()
 export type Session = {
-    profile: Profile,
+    profile: Profile
     authorization: string
     exp: number
 }
