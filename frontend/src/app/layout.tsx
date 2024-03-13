@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import '../globals.css'
+import './globals.css'
 import {Navigation} from "@/app/Navigation";
 import {Footer} from "@/app/Footer";
 
@@ -18,8 +18,10 @@ export default function RootLayout(props : RootLayoutProps) {
     return (
         <html  lang="en" suppressHydrationWarning>
         <body>
-        <Navigation />
-        {children}
+        <div className="min-h-screen">
+            <Navigation />
+            {children}
+        </div>
         <Footer />
         </body>
         </html>
