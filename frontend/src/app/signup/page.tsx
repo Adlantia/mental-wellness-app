@@ -133,7 +133,7 @@ function SignupFormContent(props: FormikProps<SignUp>) {
                         </div>
 
                        <div className="mt-5">
-                           <button className="btn btn-success border-indigo-700 bg-indigo-700 text-white w-full py-3 rounded-md hover:bg-transparent hover:text-indigo-700 font-semi-bold">Register</button>
+                           <button type="submit" className="btn btn-success border-indigo-700 bg-indigo-700 text-white w-full py-3 rounded-md hover:bg-transparent hover:text-indigo-700 font-semi-bold">Register</button>
                        </div>
                         <DisplayStatus status={status} />
                    </form>
