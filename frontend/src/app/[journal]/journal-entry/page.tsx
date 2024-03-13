@@ -1,10 +1,15 @@
+
 export default function JournalEntry (){
+
+
     return (
         <>
 
             <header style={{ fontSize: '24px', margin: '20px 0', textAlign: 'center' }}>
                 Journal
             </header>
+
+
             <form id="journalForm" className="mb-10">
                 <input
                     type="text"
