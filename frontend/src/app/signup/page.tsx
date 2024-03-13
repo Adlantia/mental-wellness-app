@@ -12,7 +12,7 @@ import {FormDebugger} from "@/app/components/formDebugger";
 export default function SignUpForm() {
 
     const initialValues : SignUp = {
-        profileId: '',
+        profileId: null,
         profileName:  '',
         profileEmail: '',
         profilePassword: '',
@@ -21,7 +21,7 @@ export default function SignUpForm() {
 
     const handleSubmit = (values: SignUp, actions: FormikHelpers<SignUp>) => {
         const {setStatus, resetForm} = actions
-        fetch('/apis/signup', {
+        fetch('/apis/sign-up', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -137,7 +137,7 @@ function SignupFormContent(props: FormikProps<SignUp>) {
                        </div>
                         <DisplayStatus status={status} />
                    </form>
-                   {/*<FormDebugger  {...props}/>*/}
+                   <FormDebugger  {...props}/>
 
                </div>
            </div>

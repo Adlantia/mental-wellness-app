@@ -15,7 +15,7 @@ export async function POST(request: Response) {
             },
             body: JSON.stringify(data)
         }
-             )
+    )
 
     const response = responseFormServer.clone()
 
