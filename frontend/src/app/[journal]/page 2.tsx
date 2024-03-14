@@ -3,7 +3,7 @@
 import {Journal} from "@/app/shared/Journal";
 import {fetchAllJournals} from "@/utils/http/journal.http";
 import {Profile} from "@/utils/models/profile.model";
-import {Journal} from "@/utils/models/journal.model";
+// import {Journal} from "@/utils/models/journal.model";
 
 export default async function JournalList() {
     const journals =  [

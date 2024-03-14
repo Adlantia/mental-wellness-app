@@ -80,8 +80,5 @@ export async function getJournalsByJournalProfileIdController (request: Request,
     }   catch (error) {
         return response.json({
             status: 500,
-            message:'',
-            data: []
+            message: '',
         })
-    }
-}

@@ -23,3 +23,4 @@ router.route('/')
 // router.route('/journalId/:journalId')
 //     .get(isLoggedInController, getJournalByJournalId)
 
+
