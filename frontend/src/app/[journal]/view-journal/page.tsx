@@ -1,4 +1,4 @@
-import {Journal} from "@/app/shared/Journal";
+import {JournalCard} from "@/app/shared/JournalCard";
 
 export default function ViewJournalEntry (){
     const journalEntry =
@@ -30,7 +30,7 @@ export default function ViewJournalEntry (){
             <div className = "p-4 w-3/4 mx-auto">
                 <div className="flex">
                         <p>
-                        <Journal  journal={journalEntry}/>
+                        <JournalCard journal={journalEntry}/>
                             </p>
                 </div>
             </div>
