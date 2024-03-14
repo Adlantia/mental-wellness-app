@@ -38,3 +38,7 @@ export default function Graph () {
         </div>
     )
 }
+
+async function getData(): Promise<Log[]> {
+    return await fetchLogsByLogProfileId()
+}
