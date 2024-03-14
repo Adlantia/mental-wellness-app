@@ -1,9 +1,9 @@
 import {Request, Response} from "express"
 import {Status} from "../../utils/interfaces/Status"
-import {createJournal, Journal, selectJournalEntries} from "./journal.model"
+import {createJournal, Journal, selectJournalsByJournalProfileId, selectJournalEntries} from "./journal.model"
 import {JournalSchema} from "./journal.validator"
 import {zodErrorResponse} from "../../utils/response.utils"
-import {PrivateProfile} from "../profile/profile.model"
+import {PrivateProfile, PublicProfile} from "../profile/profile.model"
 
 export async function createJournalController(request: Request, response: Response): Promise<Response | undefined> {
     try {
@@ -56,6 +56,27 @@ export async function getJournalEntriesController(request: Request, response: Re
         return response.json({
             status: 500,
             message: 'Error retrieving journal entries',
+            data: []
+        })
+    }
+}
+
+export async function getJournalByJournalProfileIdController (request: Request, response: Response) : Promise <Response> {
+    try{
+       const profile = request.session.profile as PublicProfile
+
+       const journalProfileId = profile.profileId as string
+
+       const data = await selectJournalsByJournalProfileId(journalProfileId)
+
+        // return the response with the status code 200, a message, and the log as data
+        return response.json({ status: 200, message: null, data })
+
+        //if an error occurs, return the error to the user
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
             data: []
         })
     }
