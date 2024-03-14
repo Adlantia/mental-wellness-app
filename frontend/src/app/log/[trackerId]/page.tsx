@@ -12,7 +12,8 @@ export default async function Page({params}: {params: {trackerId: string}})  {
             const tracker = await getData(trackerId)
     return (
             <section className = 'container'>
-                <h1 className='text-3xl max-w-fit mx-auto py-4 mt-4'> {tracker.trackerQuestion} </h1>
+                <h1 className='text-3xl max-w-fit mx-auto py-4 mt-4'> {tracker.trackerCategory} </h1>
+                <h2 className='text-3xl max-w-fit mx-auto py-4 mt-4'> {tracker.trackerQuestion} </h2>
                 <RatingScale />
                 <div className = 'flex justify-center gap-4 my-6'>
                     <SubmitButton buttonName = 'Submit' />
