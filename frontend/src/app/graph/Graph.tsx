@@ -1,22 +1,49 @@
 'use client'
 
 import {CartesianGrid, Line, LineChart, Tooltip, YAxis} from "recharts";
+import {Tracker} from "@/utils/models/tracker.model";
+import {Log} from "@/utils/models/log.model";
+type graphProps = {logs: Log[]
+    trackers: Tracker[]
+}
 
-export function Graph() {
-    const data = [
-        {
-            date: 'test', sleep: 3, mood: 5
-        },
-        {
-            date: 'test', sleep: 5, mood: 2
-        },
-        {
-            date: 'test', sleep: 1, mood: null
-        },
-        {
-            date: 'test', sleep: 3, mood: 3
-        }
-    ];
+export function Graph(props: graphProps) {
+    const {logs, trackers} = props
+
+    const newArray = logs.map(log => {
+
+        // let newLog: any = {date:log.logDatetime}
+        let newLog: any = {date:"test"}
+
+        trackers.map(tracker => {
+            if(tracker.trackerId === log.logTrackerId) {
+                newLog[tracker.trackerCategory] = log.logAnswer
+            }   else {
+                newLog[tracker.trackerCategory] = null
+            }
+
+        } )
+        return newLog
+
+
+    })
+    console.log(newArray)
+
+    const data = newArray
+    //     [
+    //     {
+    //         date: 'test', sleep: 3, mood: 5
+    //     },
+    //     {
+    //         date: 'test', sleep: 5, mood: 2
+    //     },
+    //     {
+    //         date: 'test', sleep: 1, mood: null
+    //     },
+    //     {
+    //         date: 'test', sleep: 3, mood: 3
+    //     }
+    // ];
     return (
         <>
             <div className="flex mx-auto flex-col">
