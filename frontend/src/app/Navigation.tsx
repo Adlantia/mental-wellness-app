@@ -7,7 +7,7 @@ export function Navigation () {
         <div className="navbar bg-base-300 justify-between">
             <div className="flex-none">
                 <button className="btn btn-circle btn-ghost color-primary">
-                    <a href='dashboard'><FontAwesomeIcon className="w-5 h-5" icon={faHouse}/></a>
+                    <a href='/dashboard'><FontAwesomeIcon className="w-5 h-5" icon={faHouse}/></a>
                 </button>
             </div>
             <div>
