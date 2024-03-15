@@ -3,22 +3,29 @@
 import {Log} from "@/utils/models/log.model";
 import {fetchLogsByLogProfileId} from "@/utils/http/log.http";
 import {Graph} from "@/app/graph/Graph";
+import {getSession} from "@/utils/models/fetchSession";
+import {redirect} from "next/navigation";
 
 
 
 
 
 export default async function () {
+    const session = await getSession()
+    if(session === undefined) {
+        redirect("/login")
 
-    const logs= await getData()
+    }
+    console.log(session)
+    const logs= await getData(session.authorization)
     console.log("logs", logs)
     return (
        <Graph />
     )
 }
 
-async function getData(): Promise<Log[]> {
-    return fetchLogsByLogProfileId()
+async function getData(authorization: string): Promise<Log[]> {
+    return fetchLogsByLogProfileId(authorization)
 }
 
 

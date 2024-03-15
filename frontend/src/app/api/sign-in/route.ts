@@ -6,7 +6,7 @@ export async function POST(request: Response) {
 
     const data = await request.json()
 
-    const responseFormServer = await fetch(`${process.env.REST_API_URL}/apis/login`,
+    const responseFormServer = await fetch(`${process.env.REST_API_URL}/apis/sign-in`,
         {
             method: "POST",
             credentials: "include",
