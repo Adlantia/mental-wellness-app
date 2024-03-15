@@ -13,7 +13,7 @@ export default async function Page({params}: {params: {trackerId: string}})  {
             <section className = 'container'>
                 <h1 className='text-3xl max-w-fit mx-auto py-4 mt-4'> {tracker.trackerCategory} </h1>
                 <h2 className='text-3xl max-w-fit mx-auto py-4 mt-4'> {tracker.trackerQuestion} </h2>
-                <LoggingForm  session={session?.authorization}/>
+                <LoggingForm />
             </section>
     )
 }

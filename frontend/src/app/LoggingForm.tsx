@@ -12,11 +12,12 @@ type LoggingFormProps = {
 
 export function LoggingForm(props: LoggingFormProps) {
     const router = useRouter()
-    const {session} = props
-    if (session === undefined) {
-        return <></>
-    }
-    const {profile, authorization} = session
+    //TODO: put the next five lines back when session issue sorted
+    // const {session} = props
+    // if (session === undefined) {
+    //     return <></>
+    // }
+    // const {profile, authorization} = session
     const  initialValues = {
         logAnswer: ''
     }
