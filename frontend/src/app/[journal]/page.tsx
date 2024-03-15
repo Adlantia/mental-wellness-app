@@ -1,35 +1,11 @@
 
 
-import {Journal} from "@/app/shared/Journal";
-import {fetchAllJournals} from "@/utils/http/journal.http";
-import {Profile} from "@/utils/models/profile.model";
-// import {Journal} from "@/utils/models/journal.model";
+import {JournalCard} from "@/app/shared/JournalCard";
+import {fetchJournalsByJournalProfileId} from "@/utils/http/journal.http";
+import {Journal} from "@/utils/models/journal.model";
 
 export default async function JournalList() {
-    const journals =  [
-        {
-            journalId: 'd96b4953-4d15-4cf7-90d2-25b32d3bb2b2',
-            journalProfileId: '891f85a2-c9ff-45b7-b988-d62c02aedd10',
-            journalTitle: 'ImATitle',
-            journalDateTime: '01/12/2000',
-            journalText: 'jldjld sdljfds; ljl;k'
-        },
-        {
-            journalId: 'd5db31a1-0f4f-4552-9c01-40241bdc23a6',
-            journalProfileId: '623e4546-7ebc-41dc-a276-2c981f54fe52',
-            journalTitle: 'ImAnotherTitle',
-            journalDateTime: '01/04/2000',
-            journalText: 'jdlsjd lsdjd '
-        },
-
-        {
-            journalId: '478c380d-d111-4f31-a334-4aad15ebeb62',
-            journalProfileId: '2f4c14a5-4b7e-4e9e-8d17-64a04cde9469',
-            journalTitle: 'New Title',
-            journalDateTime: '01/01/2000',
-            journalText: 'lskwks skeidkdm'
-        }
-    ]
+    const journals = await getData()
     return (
         <>
 
@@ -44,7 +20,7 @@ export default async function JournalList() {
                 </a>
 
                 <div className="flex flex-col items-center justify-center sm:flex-row sm:flex-wrap">
-                    {journals.map(journal => <Journal key={journal.journalId} journal={journal}/>
+                    {journals.map(journal => <JournalCard key={journal.journalId} journal={journal}/>
                     )}
 
                 </div>
@@ -55,5 +31,5 @@ export default async function JournalList() {
 }
 
 async function getData(): Promise<Journal[]> {
-    return await fetchAllJournals()
+    return await fetchJournalsByJournalProfileId()
 }

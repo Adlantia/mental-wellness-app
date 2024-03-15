@@ -14,7 +14,7 @@ export async function fetchAllJournals(): Promise<Journal[]>{
     return JournalSchema.array().parse(data)
 }
 
-export async function fetchAllJournalByJournalId(): Promise<Journal>{
+export async function fetchJournalsByJournalProfileId(): Promise<Journal[]>{
     const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/journal`)
         .then(response => {
             if(!response.ok) {
@@ -23,5 +23,5 @@ export async function fetchAllJournalByJournalId(): Promise<Journal>{
                 return response.json()
             }
         })
-    return JournalSchema.parse(data)
+    return JournalSchema.array().parse(data)
 }
