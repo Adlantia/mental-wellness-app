@@ -2,25 +2,26 @@
 
 import {Formik, FormikHelpers, FormikProps} from "formik";
 import {toFormikValidationSchema} from "zod-formik-adapter";
-import {Journal, JournalSchema} from "@/utils/models/journal.model";
+import {JournalSchema} from "@/utils/models/journal.model";
 import {DisplayError} from "@/app/components/displayError";
 import {DisplayStatus} from "@/app/components/displayStatus";
-
-import {useRouter} from "next/router";
+import React from "react";
+import {useRouter} from "next/navigation";
 import {z} from "zod";
+import {Session} from "@/utils/models/fetchSession";
 
 
 
 type JournalFormProps = {
     session: Session | undefined
 }
-export  function JournalForm (props: JournalFormProps) {
+export function JournalForm (props: JournalFormProps) {
     const router = useRouter()
 
     const {session} = props
 
     if(session === undefined) {
-        return <></>
+        return <> Please Login</>
     }
 
     const {profile, authorization} = session
@@ -43,10 +44,10 @@ export  function JournalForm (props: JournalFormProps) {
             body: JSON.stringify(journal)
         }).then(response => response.json()).then(json => {
          //   let type = 'alert alter-danger'
-            if (json.status === 200) {
-                resetForm()
-                router.refresh()
-            }
+         //    if (json.status === 200) {
+         //        resetForm()
+         //        router.refresh()
+         //    }
             setStatus({type:json, message: json.message})
         })
     }
@@ -63,7 +64,7 @@ export  function JournalForm (props: JournalFormProps) {
         </>
     )
 }
-function JournalLoginFormContent (props: FormikProps<journal>) {
+function JournalLoginFormContent (props: any) {
     const {
         status,
         values,

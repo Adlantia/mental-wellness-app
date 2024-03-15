@@ -18,7 +18,7 @@ export default function SignInForm() {
 
     const handleSubmit = (values: SignIn, actions: FormikHelpers<SignIn>) => {
         const {setStatus, resetForm} = actions
-        fetch('apis/login', {
+        fetch('/api/sign-in', {
             method: "POST",
             headers: {
                     "Content-Type": "application/json",
