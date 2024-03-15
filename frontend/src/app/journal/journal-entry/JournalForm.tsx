@@ -10,8 +10,6 @@ import {useRouter} from "next/navigation";
 import {z} from "zod";
 import {Session} from "@/utils/models/fetchSession";
 
-
-
 type JournalFormProps = {
     session: Session | undefined
 }
@@ -43,11 +41,11 @@ export function JournalForm (props: JournalFormProps) {
             },
             body: JSON.stringify(journal)
         }).then(response => response.json()).then(json => {
-         //   let type = 'alert alter-danger'
-         //    if (json.status === 200) {
-         //        resetForm()
-         //        router.refresh()
-         //    }
+           let type = 'alert alter-danger'
+            if (json.status === 200) {
+                resetForm()
+                router.refresh()
+            }
             setStatus({type:json, message: json.message})
         })
     }
@@ -98,7 +96,7 @@ function JournalLoginFormContent (props: any) {
                             width: '100%',
                             padding: '10px 10px',
                             marginBottom: '10px',
-                            color: '#555',
+                            color: '#444',
                         }
                         }
                         placeholder="Title"
@@ -109,26 +107,29 @@ function JournalLoginFormContent (props: any) {
 
                 <DisplayError errors={errors} touched={touched} field={"journalTitle"} />
                 {/* <DisplayStatus status={status} />*/}
-
-                <input
-                    id="journalContent"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.journalText}
-                    name="journalText"
-                    // rows= "8"
-                    style={{
-                        fontSize: '16px',
-                        width: '100%',
-                        padding: '10px',
-                        marginBottom: '10px',
-                        color: '#555',
-                    }}
-                    placeholder="Journal Entry"
-                    required
+                <div>
+                    <textarea
+                        autoFocus
+                        className = "textarea"
+                        id="journalContent"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.journalText}
+                        name="journalText"
+                        style={{
+                            fontSize: '16px',
+                            width: '100%',
+                            padding: '10px',
+                            marginBottom: '10px',
+                            color: '#555',
+                            height: '200px'
+                        }}
+                        placeholder="Start your journal entry"
+                        required
                     >
-                </input>
-                <DisplayStatus status={status} />
+                    </textarea>
+                </div>
+
 
                 <div style={{textAlign: 'center'}}>
                     <button
