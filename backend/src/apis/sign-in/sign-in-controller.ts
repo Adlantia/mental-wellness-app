@@ -56,7 +56,7 @@ export async function signInController (request: Request, response: Response): P
 
         //generate new jwt for session using profile info and signature
         const authorization: string = generateJwt({
-            profileId, profileName
+            profileId, profileName, profileEmail
         }, signature)
 
         //set session variables
