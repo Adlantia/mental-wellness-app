@@ -1,8 +1,9 @@
-'use server'
+"use server"
 
+import {Log, LogSchema} from "@/utils/models/log.model";
 
-export async function fetchAllLogs(): Promise<log[]> {
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/graph`)
+export async function fetchAllLogs(): Promise<Log[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/log`)
         .then(response => {
             if(!response.ok) {
                 throw new Error(`error fetching logs`)
@@ -13,8 +14,8 @@ export async function fetchAllLogs(): Promise<log[]> {
     return LogSchema.array().parse(data)
 }
 
-export async function fetchLogsbyLogProfileIt(): Promise<logs[]> {
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/graph`)
+export async function fetchLogsByLogProfileId(): Promise<Log[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/log`)
         .then(response => {
             if(!response.ok) {
                 throw new Error(`error fetching log`)
