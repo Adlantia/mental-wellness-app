@@ -1,6 +1,7 @@
 "use server"
-
+import {unstable_noStore as noStore} from "next/cache";
 import {Log, LogSchema} from "@/utils/models/log.model";
+import {cookies} from "next/headers";
 
 export async function fetchAllLogs(): Promise<Log[]> {
     const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/log`)
@@ -15,10 +16,15 @@ export async function fetchAllLogs(): Promise<Log[]> {
 }
 
 export async function fetchLogsByLogProfileId(authorization: string): Promise<Log[]> {
+    noStore()
+    const cookieStore = cookies()
+    const cookieValue = cookieStore.get('connect.sid')?.value ?? ""
+
     const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/log`, {
         headers: {
-            authorization
-        }
+            authorization,
+            cookie: `connect.sid=${cookieValue}`
+        },
     })
         .then(response => {
             if(!response.ok) {
@@ -27,6 +33,6 @@ export async function fetchLogsByLogProfileId(authorization: string): Promise<Lo
                 return response.json()
             }
         })
-    console.log(data)
+    console.log("data", data)
     return LogSchema.array().parse(data)
 }

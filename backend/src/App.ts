@@ -48,12 +48,12 @@ export class App {
         this.app.use(express.json())
         this.app.use(session( {
             store: this.redisStore,
+            proxy: true,
             saveUninitialized: false,
             secret: process.env.SESSION_SECRET as string,
             resave: false,
             cookie: {
                 sameSite: "lax",
-                httpOnly: true
             }
 
         }))
