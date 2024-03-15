@@ -18,7 +18,7 @@ export function LoggingForm(props: LoggingFormProps) {
     }
     const {profile, authorization} = session
     const  initialValues = {
-        logAnswer = ''
+        logAnswer: ''
     }
     // here there be formSchema, related to LogSchema, which I have not yet made
     // here there be type for Values, which is dependent on formSchema
@@ -48,6 +48,6 @@ export function LoggingForm(props: LoggingFormProps) {
         <div className = 'flex justify-center gap-4 my-6'>
             <SubmitButton buttonName = 'Submit' />
         </div>
-    </>
+        </>
     )
 }
