@@ -3,9 +3,16 @@
 import {JournalCard} from "@/app/shared/JournalCard";
 import {fetchJournalsByJournalProfileId} from "@/utils/http/journal.http";
 import {Journal} from "@/utils/models/journal.model";
+import {getSession} from "@/utils/models/fetchSession";
+import {redirect} from "next/navigation";
 
 export default async function JournalList() {
-    const journals = await getData()
+    const session = await getSession()
+    if(session === undefined) {
+        redirect("/login")
+    }
+
+    const journals = await getData(session.authorization)
     return (
         <>
 
@@ -30,6 +37,6 @@ export default async function JournalList() {
     )
 }
 
-async function getData(): Promise<Journal[]> {
-    return await fetchJournalsByJournalProfileId()
+async function getData(authorization: string): Promise<Journal[]> {
+    return  fetchJournalsByJournalProfileId(authorization)
 }

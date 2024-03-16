@@ -37,7 +37,11 @@ function setJwtToken(jwtToken: string) {
     try {
         const  parsedJwtToken = jwtDecode(jwtToken) as any
 
+
     console.log(parsedJwtToken)
+
+        //console.log("token is expired", currentTimeInSeconds < parsedJwtToken.exp)
+
         if(parsedJwtToken &&  currentTimeInSeconds < parsedJwtToken.exp) {
 
             session = {
