@@ -3,6 +3,7 @@
 import {CartesianGrid, Line, LineChart, Tooltip, YAxis} from "recharts";
 import {Tracker} from "@/utils/models/tracker.model";
 import {Log} from "@/utils/models/log.model";
+
 type graphProps = {logs: Log[]
     trackers: Tracker[]
 }
