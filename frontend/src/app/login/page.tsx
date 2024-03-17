@@ -11,7 +11,7 @@ import {FormDebugger} from "@/app/components/formDebugger";
 
 export default function SignInForm() {
 
-    const initialValues : SignIn = {
+    const initialValues  = {
         profileEmail: '',
         profilePassword: '',
     }
@@ -51,7 +51,7 @@ export default function SignInForm() {
 
 
 
-export function SignInFormContent(props: FormikProps<SignIn>) {
+export function SignInFormContent(props: FormikProps<SignIn>): any {
 
     const {
         status,
