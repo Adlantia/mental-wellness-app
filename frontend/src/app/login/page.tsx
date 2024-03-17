@@ -30,6 +30,10 @@ export default function SignInForm() {
                 if(json.status === 200) {
                     resetForm()
                     type = 'alert alert-success'
+
+                    // Redirect to the dashboard page after successful login
+                    window.location.href = '/dashboard'
+
                 }
                 setStatus({type, message: json.message})
             })

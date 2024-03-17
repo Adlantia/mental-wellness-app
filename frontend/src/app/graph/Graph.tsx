@@ -72,9 +72,11 @@ export function Graph(props: graphProps) {
     }
     return (
         <>
-            <div className="flex mx-auto flex-col">
-                <h1 className="text-2xl text-center">Graph</h1>
-                <div
+            <div className="container flex mx-auto flex-col items-center pt-8 rounded-lg">
+                <h1 className="text-3xl font-semibold text-center mb-5">Graph Insights</h1>
+                <p className="text-lg text-center mb-6">Explore the correlation different sleep and mood over
+                    time.</p>
+                <div className="bg-gray-100 p-6 shadow-md"
                     suppressHydrationWarning={true}>
 
                     <LineChart width={600} height={300} data={data} margin={{top: 5, right: 20, bottom: 5, left: 0}}>
