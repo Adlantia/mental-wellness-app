@@ -6,7 +6,7 @@ import {cookies} from "next/headers";
 export async function fetchJournalsByJournalProfileId(authorization: string): Promise<Journal[]>{
     const sid = cookies().get('connect.sid')?.value ?? ""
 
-    const data = await fetch(`${process.env.PUBLIC_API_URL}/apis/journal`
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/journal`
         ,{
         headers: {
             "authorization": authorization

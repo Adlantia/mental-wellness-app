@@ -45,6 +45,7 @@ export function JournalForm (props: JournalFormProps) {
             if (json.status === 200) {
                 resetForm()
                 router.refresh()
+                window.location.href = '/journal'
             }
             setStatus({type:json, message: json.message})
         })

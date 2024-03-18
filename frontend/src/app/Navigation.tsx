@@ -32,7 +32,7 @@ export function Navigation () {
                         className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-52">
                         <li><a href='/mood'>Mood</a></li>
                         <li><a href='/sleep'>Sleep</a></li>
-                        <li><a href='/journal-list'>Journal</a></li>
+                        <li><a href='/journal'>Journal</a></li>
                         <li><a>Logout</a></li>
                     </ul>
                 </div>
