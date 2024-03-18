@@ -5,7 +5,7 @@ import {Footer} from "@/app/Footer";
 
 
 export const metadata: Metadata = {
-    title: 'Mental Wellness App',
+    title: 'Mind-Sight',
     description: 'description goes here',
 }
 

@@ -13,7 +13,7 @@ const config: Config = {
     require('daisyui')
   ],
   daisyui: {
-    themes: ["winter"],
+    themes: ["emerald"],
     darkTheme: "sunset"
   }
 }

@@ -11,10 +11,11 @@ export function Navigation () {
                 </button>
             </div>
             <div>
-                <a className="btn btn-ghost text-xl">Mental Wellness App</a>
+                <a className="btn btn-ghost text-xl">Mindsight</a>
+                {/*<span className="font-serif">Mindsight</span>*/}
             </div>
             <div className="flex-none">
-                <div className="avatar">
+            <div className="avatar">
                     <div className="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component"
                              src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
