@@ -122,7 +122,7 @@ function JournalLoginFormContent (props: any) {
                             padding: '10px',
                             marginBottom: '10px',
                             color: '#555',
-                            height: '200px'
+                            height: '300px'
                         }}
                         placeholder="Start your journal entry"
                         required
