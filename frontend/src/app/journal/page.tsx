@@ -27,7 +27,7 @@ export default async function JournalList() {
                 </a>
             </div>
 
-            <div className="flex flex-wrap justify-center md:justify-start p items-center x-4" style={{maxWidth: "100%"}}>
+            <div className=" flex flex-wrap justify-center md:justify-start items-center x-4 " style={{maxWidth: "100%"}}>
                 {journals.map(journal => (
                     <div key={journal.journalId} className="w-full md:w-1/3 p-2">
                         <JournalCard journal={journal}/>
