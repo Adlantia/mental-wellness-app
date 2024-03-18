@@ -1,11 +1,10 @@
 'use client'
-import {RatingScale} from "@/app/RatingScale";
-import {SubmitButton} from "@/app/SubmitButton";
-import {Formik, FormikHelpers} from "formik";
+import {Field, Form, Formik, FormikHelpers} from "formik";
 import {Session} from "@/utils/models/fetchSession";
 import {useRouter} from "next/navigation";
-import {json} from "node:stream/consumers";
 import {Values} from "zod";
+import {LogSchema} from "@/utils/models/log.model";
+
 
 type LoggingFormProps = {
     session: Session | undefined
@@ -22,10 +21,10 @@ export function LoggingForm(props: LoggingFormProps) {
     const initialValues = {
         logAnswer: ''
     }
-    // here there be formSchema, related to LogSchema, which I have not yet made
-    // here there be type for Values, which is dependent on formSchema
+    const formSchema = LogSchema.pick({logAnswer: true})
+    type Values = z.infer<typeof formSchema>
     const handleSubmit = (values: Values, actions: FormikHelpers<any>) => {
-        let log = {logAnswer: values.logAnswer}
+        let log = {"logProfileId": profile.profileId, "logId": null, "logTrackerId": null, "logAnswer": values.logAnswer, "logDatetime": null}
         let {setStatus, resetForm} = actions
         console.log(log)
         fetch('apis/log', {
@@ -48,9 +47,17 @@ export function LoggingForm(props: LoggingFormProps) {
         <>
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                 <div>
-                    <RatingScale/>
+                    <Form>
+                        <div className='flex justify-center my-6 gap-4' role={"group"}>
+                            <label className='btn btn-circle focus:bg-slate-400'><Field type="radio" name={"rating"} value={'1'}/>1</label>
+                            <label className='btn btn-circle focus:bg-slate-400'><Field type="radio" name={"rating"} value={'2'}/>2</label>
+                            <label className='btn btn-circle focus:bg-slate-400'><Field type="radio" name={"rating"} value={'3'}/>3</label>
+                            <label className='btn btn-circle focus:bg-slate-400'><Field type="radio" name={"rating"} value={'4'}/>4</label>
+                            <label className='btn btn-circle focus:bg-slate-400'><Field type="radio" name={"rating"} value={'5'}/>5</label>
+                        </div>
+                    </Form>
                     <div className='flex justify-center gap-4 my-6'>
-                        <SubmitButton buttonName='Submit'/>
+                        <button type="submit" className="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </Formik>
