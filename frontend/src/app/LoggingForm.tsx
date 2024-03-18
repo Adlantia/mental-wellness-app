@@ -2,9 +2,10 @@
 import {RatingScale} from "@/app/RatingScale";
 import {SubmitButton} from "@/app/SubmitButton";
 import {Formik, FormikHelpers} from "formik";
-import { Session } from "@/utils/models/fetchSession";
+import {Session} from "@/utils/models/fetchSession";
 import {useRouter} from "next/navigation";
 import {json} from "node:stream/consumers";
+import {Values} from "zod";
 
 type LoggingFormProps = {
     session: Session | undefined
@@ -18,7 +19,7 @@ export function LoggingForm(props: LoggingFormProps) {
     //     return <></>
     // }
     // const {profile, authorization} = session
-    const  initialValues = {
+    const initialValues = {
         logAnswer: ''
     }
     // here there be formSchema, related to LogSchema, which I have not yet made
@@ -26,11 +27,12 @@ export function LoggingForm(props: LoggingFormProps) {
     const handleSubmit = (values: Values, actions: FormikHelpers<any>) => {
         let log = {logAnswer: values.logAnswer}
         let {setStatus, resetForm} = actions
+        console.log(log)
         fetch('apis/log', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "authorization": `${authorization}`
+                // "authorization": `${authorization}`
             },
             body: JSON.stringify(log) //or should we be passing ratingOption here?
         }).then(response => response.json()).then(json => {
@@ -42,13 +44,16 @@ export function LoggingForm(props: LoggingFormProps) {
         })
     }
 
-    // Does the Formik tag wrap the RatingScale and submit button in the following return?
     return (
         <>
-        <RatingScale />
-        <div className = 'flex justify-center gap-4 my-6'>
-            <SubmitButton buttonName = 'Submit' />
-        </div>
+            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                <div>
+                    <RatingScale/>
+                    <div className='flex justify-center gap-4 my-6'>
+                        <SubmitButton buttonName='Submit'/>
+                    </div>
+                </div>
+            </Formik>
         </>
     )
 }

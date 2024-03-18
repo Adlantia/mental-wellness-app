@@ -1,15 +1,18 @@
-import { RatingButton } from "./RatingButton";
+import {RatingButton} from "./RatingButton";
+import {Form} from "formik";
 
-export function RatingScale () {
+export function RatingScale() {
     return (
         <>
-        <div className = 'flex justify-center my-6'>
-        <RatingButton ratingOption = '1' />
-        <RatingButton ratingOption = '2' />
-        <RatingButton ratingOption = '3' />
-        <RatingButton ratingOption = '4' />
-        <RatingButton ratingOption = '5' />
-        </div>
+            <Form>
+                <div className='flex justify-center my-6'>
+                    <RatingButton value={'1'} ratingOption='1'/>
+                    <RatingButton value={'2'} ratingOption='2'/>
+                    <RatingButton value={'3'} ratingOption='3'/>
+                    <RatingButton value={'4'} ratingOption='4'/>
+                    <RatingButton value={'5'} ratingOption='5'/>
+                </div>
+            </Form>
         </>
     )
 }
