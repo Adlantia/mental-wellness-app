@@ -12,7 +12,7 @@ type LoggingFormProps = {
 
 export function LoggingForm(props: LoggingFormProps) {
     const router = useRouter()
-    //TODO: put the next five lines back when session issue sorted
+    //TODO: put the next five lines back when session issue sorted; solution found, need to find where to implement
     // const {session} = props
     // if (session === undefined) {
     //     return <></>
