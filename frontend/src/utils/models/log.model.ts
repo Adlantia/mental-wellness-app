@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {z} from "zod";
+=======
+import {z} from 'zod'
+>>>>>>> development
 
 export const LogSchema = z.object({
     logId: z.string({required_error: 'please provide a valid logId'}).uuid({message: 'please provide a valid uuid for logId'}).nullable(),

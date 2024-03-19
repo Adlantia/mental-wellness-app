@@ -1,12 +1,13 @@
 
 import {cookies} from "next/headers";
+import {NextRequest, NextResponse} from "next/server";
 
 
-export async function POST(request: Response) {
+export async function POST(request: NextRequest): Promise <Response> {
 
     const data = await request.json()
 
-    const responseFormServer = await fetch(`${process.env.REST_API_URL}/apis/login`,
+    const responseFormServer = await fetch(`${process.env.REST_API_URL}/apis/sign-in`,
         {
             method: "POST",
             credentials: "include",

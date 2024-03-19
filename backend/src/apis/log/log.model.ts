@@ -22,68 +22,7 @@ export async function insertLog(log: Log): Promise<string> {
     // return a message to the user indicating success
     return 'log successfully entered'
 }
-//
-// /**
-//  * selects a log from the log table by logId and returns the log
-//  * @param log to be selected by logId
-//  * @returns the log that was selected
-//  * @returns null if no log was found
-//  */
-// export async function selectLogByLogId(log: log): Promise<log | null> {
-//
-//     // deconstruct the log object
-//     const {logProfileId, logThreadId} = log
-//
-//     // select the log from the log table by logId
-//     const rowList = <log[]>await sql`SELECT log_profile_id, log_thread_id, log_datetime
-//                                       FROM "log"
-//                                       WHERE log_profile_id = ${logProfileId}
-//                                         AND log_thread_id = ${logThreadId}`
-//
-//     // parse the result into an array of logs
-//     const result = logSchema.array().max(1).parse(rowList)
-//
-//     // return the log that was selected
-//     return result.length === 0 ? null : result[0]
-// }
-//
-// /**
-//  * deletes a log from the log table and returns a message
-//  * @param log to be deleted
-//  * @returns 'log successfully deleted'
-//  */
-// export async function deleteLog(log: log): Promise<string> {
-//
-//     // deconstruct the log object
-//     const {logProfileId, logThreadId} = log
-//
-//     // delete the log from the log table
-//     await sql`DELETE
-//               FROM "log"
-//               WHERE log_profile_id = ${logProfileId}
-//                 AND log_thread_id = ${logThreadId}`
-//
-//     // return a message to the user indicating success
-//     return 'log successfully deleted'
-// }
-//
-//
-// /**
-//  * selects logs from the log table by logThreadId and returns the logs
-//  * @param logThreadId
-//  * @returns the logs that were selected
-//  */
-// export async function selectLogsByLogThreadId(logThreadId: string): Promise<log[]> {
-//
-//     // select the logs from the log table by logThreadId
-//     const rowList = <log[]>await sql`SELECT log_profile_id, log_thread_id, log_datetime
-//                                       FROM "log"
-//                                       WHERE log_thread_id = ${logThreadId}`
-//
-//     // parse the result into an array of logs and return it
-//     return logSchema.array().parse(rowList)
-// }
-//
+
 /**
  * selects logs from the log table by logProfileId and returns the logs
  * @param logProfileId to be selected by logProfileId

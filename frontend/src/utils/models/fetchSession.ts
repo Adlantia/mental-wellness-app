@@ -33,13 +33,17 @@ export async function getSession(): Promise<Session|undefined > {
 
 
 function setJwtToken(jwtToken: string) {
-    console.log("jwtToken", jwtToken)
+
     try {
         const  parsedJwtToken = jwtDecode(jwtToken) as any
 
-        console.log("token is expired", currentTimeInSeconds < parsedJwtToken.exp)
+
+    console.log(parsedJwtToken)
+
+        //console.log("token is expired", currentTimeInSeconds < parsedJwtToken.exp)
 
         if(parsedJwtToken &&  currentTimeInSeconds < parsedJwtToken.exp) {
+
             session = {
                 profile: ProfileSchema.parse(parsedJwtToken.auth),
                 authorization: jwtToken,
@@ -52,6 +56,7 @@ function setJwtToken(jwtToken: string) {
 
 
     } catch (error) {
+        console.error(error)
         session = undefined
 
     }

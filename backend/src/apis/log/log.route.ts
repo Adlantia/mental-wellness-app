@@ -13,15 +13,7 @@ const router = Router()
 router.route('/')
     .post(isLoggedInController, postLogController)
 
-// define log route for this router
-// router.route('/toggle')
-//     .post(isLoggedInController, logController)
-//
-// // define log route for this router
-// router.route('/logThreadId/:logThreadId')
-//     .get(getLogsByLogThreadIdController)
-//     .delete(isLoggedInController, deleteLogController)
-//
+
 router.route('/')
     .get(isLoggedInController, getLogsByLogProfileIdController)
 
