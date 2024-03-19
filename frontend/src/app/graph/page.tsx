@@ -24,11 +24,15 @@ export default async function () {
     console.log("logs", logs)
 
     const newLogArray: any[] = []
-
+// construct date
     logs.map((log, index) => {
+        const date = log.logDatetime as Date
+        const day = date.getDate()
+        const month = date.getMonth()+1
+        const year = date.getFullYear() -2000
 
-        let newLog: any = {date:log.logDatetime}
-        // let newLog: any = {date: `2024-03-0${index+1}`}
+        // Concatenate date in format needed for graph
+        let newLog: any = {date:`${month}/${day}/${year}`}
 
         trackers.map(tracker => {
             if(tracker.trackerId === log.logTrackerId) {
@@ -41,7 +45,8 @@ export default async function () {
                     newLog[tracker.trackerCategory] = (index) ? newLogArray[index - 1].Sleep : null
                     // if tracker.trackerCategory is not sleep and logAnswer is undefined then we need to fill in the undefined values
 
-                } else {
+                } else if(newLogArray[index - 1][tracker.trackerCategory] )
+                {
                     // get prior value for mood (priorValue)
                     const priorValue = newLogArray[index - 1][tracker.trackerCategory]
 
@@ -67,6 +72,9 @@ export default async function () {
                            break;
                        }
                     }
+                } else {
+                    // if there is no previous entry, make this null
+                    newLog[tracker.trackerCategory] = null
                 }
             }
         } )
