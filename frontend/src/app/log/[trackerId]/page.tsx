@@ -7,13 +7,17 @@ import {getSession} from "@/utils/models/fetchSession";
 
 export default async function Page({params}: {params: {trackerId: string}})  {
     const session = await getSession()
+    console.log(session)
     const {trackerId}= params
     const tracker = await getData(trackerId)
+    if (session === undefined) {
+        return <></>
+    }
     return (
             <section className = 'container'>
                 <h1 className='text-3xl max-w-fit mx-auto py-4 mt-4'> {tracker.trackerCategory} </h1>
                 <h2 className='text-3xl max-w-fit mx-auto py-4 mt-4'> {tracker.trackerQuestion} </h2>
-                <LoggingForm />
+                <LoggingForm session={session} trackerId={trackerId} />
             </section>
     )
 }
