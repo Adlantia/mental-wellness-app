@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Mindsight
 
-## Getting Started
+## Description
 
-First, run the development server:
+Mindsight is a mental wellness application designed to help users track their mood and sleep patterns, journal their feelings, and gain insights into the correlation between sleep levels and mood fluctuations. With a user-friendly interface and intuitive features, Mindsight empowers users to prioritize their mental well-being and develop a deeper understanding of their emotional health.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Mood and Sleep Tracking**: Users can rate their mood and sleep quality on a scale of 1 to 5, visualizing the data on an interactive line graph.
+- **Journaling**: Mindsight offers a journaling feature where users can record their thoughts, feelings, and experiences.
+- **Journal Entry Management**: Users can view past journal entries, allowing for reflection and monitoring of personal growth.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Frontend**:
+    - [React](https://reactjs.org/): JavaScript library for building user interfaces.
+    - [Tailwind CSS](https://tailwindcss.com/): Utility-first CSS framework for rapidly building custom designs.
+    - [DaisyUI](https://daisyui.com/): A component library for Tailwind CSS.
+    - [Formik](https://formik.org/): Form library for React to handle form validation and management.
 
-## Learn More
+- **Backend**:
+    - [Express](https://expressjs.com/): Fast, unopinionated, minimalist web framework for Node.js.
+    - [SQL](https://www.sql.org/): Standard language for storing, manipulating, and retrieving data in relational databases.
 
-To learn more about Next.js, take a look at the following resources:
+- **Testing and Debugging**:
+    - [Insomnia](https://insomnia.rest/): Powerful REST API client for testing APIs.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Access Mindsight through its hosted domain: [https://www.xxxxxx.com](https://www.xxxxx.com).
+2. Sign up or log in to your Mindsight account.
+3. Email verification will be sent for Sign Up registration.
+4. Track your mood and sleep daily using the provided scales.
+5. Journal your thoughts and feelings by clicking on the "Journal" tab.
+6. View your journal entries and graph trends.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## License
+
+This project is licensed under the Apache License 2.0
+
+## Acknowledgements
+
+We would like to thank the following individuals and projects for their contributions and inspiration:
+- [Tailwind CSS](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)
+- [React](https://reactjs.org/)
+- [Express](https://expressjs.com/)
+- [Formik](https://formik.org/)
+- [Insomnia](https://insomnia.rest/)
+
+## About the Authors
+
+Mindsight was developed by a team of passionate Full Stack developers:
+
+- Ashish Khatri - [LinkedIn](https://www.linkedin.com/in/ashishkhatri09920a121/), [GitHub](https://github.com/ash1shkhatri)
+- Adelita Martinez - [LinkedIn](https://www.linkedin.com/in/adelitamartinez/), [GitHub](https://github.com/AdelitaMartinez)
+- Dawn Catanach - [LinkedIn](https://www.linkedin.com/in/dawncatanach/), [GitHub](https://github.com/DMCatanach)
+- Lex Garey-Fernandez - [LinkedIn](https://www.linkedin.com/in/lexgarey/), [GitHub](https://github.com/lexlucid)
