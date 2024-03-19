@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import {
-    createJournalController,
+    createJournalController, getJournalByJournalId,
     getJournalByJournalProfileIdController,
     getJournalEntriesController
 } from "./journal.controller"
@@ -16,3 +16,7 @@ export const journalRoute = {router, basePath}
 router.route('/')
     .post(isLoggedInController, createJournalController)
     .get(isLoggedInController, getJournalByJournalProfileIdController)
+
+
+router.route('/:journalId')
+    .get(isLoggedInController, getJournalByJournalId)

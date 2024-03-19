@@ -26,11 +26,11 @@ export async function fetchJournalsByJournalProfileId(authorization: string): Pr
     return JournalSchema.array().parse(data)
 }
 
-
-export async function fetchJournalsByJournalId(authorization: string): Promise<Journal[]>{
+export async function fetchJournalByJournalId(journalId: string, authorization: string): Promise<Journal>{
     const sid = cookies().get('connect.sid')?.value ?? ""
 
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/journalId`
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/journal/${journalId}`
+
         ,{
             headers: {
                 "authorization": authorization
@@ -47,5 +47,9 @@ export async function fetchJournalsByJournalId(authorization: string): Promise<J
             }
         })
     console.log(data)
-    return JournalSchema.array().parse(data)
+
+
+
+    return JournalSchema.parse(data)
+
 }

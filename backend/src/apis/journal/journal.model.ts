@@ -1,6 +1,8 @@
 import {z} from 'zod'
 import {JournalSchema} from "./journal.validator"
 import {sql} from "../../utils/database.utils"
+import {PrivateProfileSchema} from "../profile/profile.validator";
+import {PrivateProfile} from "../profile/profile.model";
 
 /**
  * The shape of the journal entry in the journal table in the database
@@ -23,10 +25,10 @@ export type Journal = z.infer<typeof JournalSchema>
 export async function createJournal(journal: Journal): Promise<string> {
     const {journalId, journalProfileId, journalDateTime, journalText, journalTitle} = journal
 
-    await sql`INSERT INTO journal (journal_id, journal_profile_id, journal_date_time, journal_text, journal_title) 
-              VALUES (gen_random_uuid(), ${journalProfileId}, now(), ${journalText}, ${journalTitle})`
+    const result = await sql`INSERT INTO journal (journal_id, journal_profile_id, journal_date_time, journal_text, journal_title) 
+              VALUES (gen_random_uuid(), ${journalProfileId}, now(), ${journalText}, ${journalTitle}) returning journal_id`
 
-    return "Journal entry created successfully"
+    return result[0].journalId
 }
 
 
@@ -51,4 +53,15 @@ export async function selectJournalsByJournalProfileId(journalProfileId: string)
     console.log(rowList)
 
     return JournalSchema.array().parse(rowList)
+}
+
+export async function selectJournalByJournalId(journalId: string): Promise< Journal | null> {
+    //create prepared statement that selects the profile by profileId and execute statement
+    const rowList = await sql`SELECT journal_id, journal_profile_id, journal_date_time, journal_text, journal_title FROM journal WHERE journal_id = ${journalId}`
+
+    //enforce that the result is an array of one profile or null
+    const result = JournalSchema.array().max(1).parse(rowList)
+
+    //return the profile or null if no profile found
+    return result?.length === 1 ? result[0] : null
 }

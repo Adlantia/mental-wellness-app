@@ -68,9 +68,9 @@ function SignupFormContent(props: FormikProps<SignUp>) {
         <>
             <div className="flex justify-center items-center h-screen">
                 <div className="w-96 p-6 shadow-lg bg-white rounded-md">
-                    <h1 className="text-3xl block text-center font-semi-bold pb-4">Register
-                    </h1>
-                    <p className="mb-4">Create your account. It's free and only takes a minute</p>
+                    <h1 className=" block font-semibold pb-4 text-center text-3xl">Welcome to Mindsight</h1>
+                    <h3 className="mb-3 text-center">A place where you can track your mood, sleep, and journal your thoughts with ease.</h3>
+                    <h4 className="mb-3 text-center">Register now to get started. </h4>
                     <hr className="mt-3"></hr>
 
                     <form onSubmit={handleSubmit}>
@@ -134,9 +134,10 @@ function SignupFormContent(props: FormikProps<SignUp>) {
 
                         <div className="mt-5">
                             <button type="submit"
-                                    className="btn btn-success border-indigo-700 bg-indigo-700 text-white w-full py-3 rounded-md hover:bg-transparent hover:text-indigo-700 font-semi-bold">Register
+                                    className="btn btn-success mb-3 border-indigo-700 bg-indigo-700 text-white w-full py-3 rounded-md hover:bg-transparent hover:text-indigo-700 font-semi-bold">Register
                             </button>
                         </div>
+                        <a href= '/login' className="hover:text-sky-500 pl-8 hover:underline" >Already have an account? Click here. </a>
                         <DisplayStatus status={status}/>
                     </form>
                     {/*<FormDebugger  {...props}/>*/}
