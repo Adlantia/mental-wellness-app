@@ -75,7 +75,7 @@ export default function ProfileForm (props: ProfileUpdateProps) {
             if (json.status === 200) {
                 console.log(json)
                 resetForm()
-                router.refresh()
+                location.reload()
             }
             setStatus({type:json, message: json.message})
         })
@@ -160,7 +160,6 @@ function ProfileUpdateFormContent(props: any) {
                 <button type="submit" className="btn btn-primary">Submit</button>
                 <DisplayStatus status={status} />
             </form>
-            <FormDebugger {...props} />
         </div>
     )
 }

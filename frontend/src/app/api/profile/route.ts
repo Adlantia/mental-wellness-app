@@ -3,9 +3,11 @@ import {cookies} from "next/headers";
 import {headers as incomingHeaders} from "next/dist/client/components/headers";
 import {getSession, setJwtToken, setProfile} from "@/utils/models/fetchSession";
 import {revalidatePath} from "next/cache";
+import {unstable_noStore} from "next/cache";
+import {set} from "zod";
 
 export async function PUT(request: NextRequest): Promise <Response> {
-
+    unstable_noStore()
     const data = await request.json()
     const authorization = request.headers.get("authorization") ?? ""
     const cookieStore = cookies()
@@ -25,14 +27,14 @@ export async function PUT(request: NextRequest): Promise <Response> {
 
     const response = responseFormServer.clone()
 
-    const authorizationFromResponse = response.headers.get("authorization")
-
+    const result = await responseFormServer.json()
+    console.log("data", result)
     await setProfile(data)
 
-    if (authorizationFromResponse) {
-        setJwtToken(authorizationFromResponse)
+    if (result.data) {
+        setJwtToken(result.data)
         const cookieStore = cookies()
-        cookieStore.set("jwt-token", authorizationFromResponse, {path: "/", maxAge: 10_800_000})
+        cookieStore.set("jwt-token", result.data, {path: "/", maxAge: 10_800_000})
         revalidatePath("/", "layout")
 
     }
