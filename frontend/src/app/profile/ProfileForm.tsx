@@ -10,6 +10,7 @@ import {useRouter} from "next/navigation";
 import {z} from "zod";
 import {Session} from "@/utils/models/fetchSession";
 import {router} from "next/client";
+import {FormDebugger} from "@/app/components/formDebugger";
 
 
 type ProfileUpdateProps = {
@@ -27,38 +28,60 @@ export default function ProfileForm (props: ProfileUpdateProps) {
     const {profile, authorization} = session
 
     const initialValues  = {
+        profileId: profile.profileId,
         profileName: profile.profileName,
-        profileEmail: profile.profileEmail
+        profileEmail: profile.profileEmail,
+        profilePassword: null,
+        profilePasswordConfirm: null
     }
 
-    const formSchema = ProfileSchema.pick({profileName: true, profileEmail:true})
+    const formSchema = ProfileSchema.pick({profileName: true, profileEmail:true, profileId: true, profilePassword: true, profilePasswordConfirm: true})
+        .extend({
+            profileId: z.string({
+                required_error: 'profileId is required',
+                invalid_type_error: 'Please provide a valid profileId'
+            })
+                .uuid({message: 'please provide a valid profileId'}).nullable(),
+            profileName: z
+                .string({required_error: "Profile Name is required"})
+                .min(1, {message: 'please provide a valid profile name (min 1 characters'})
+                .max(32, {message: 'please provide a valid profile name (max 32 characters'}),
+            profilePassword: z
+                .string({required_error: "profile password is required", invalid_type_error: "please provide a valid password"})
+                .min(8, {message: 'please provide a valid password (min 8 characters)'})
+                .max(32, {message: 'please provide a valid password (max 32 characters)'}).nullable(),
+            profilePasswordConfirm: z
+                .string({required_error: "profile password is required", invalid_type_error: "please provide a valid password"})
+                .min(8, {message: 'please provide a valid password (min 8 characters)'})
+                .max(32, {message: 'please provide a valid password (max 32 characters)'}).nullable()
+        })
     type Values = z.infer<typeof formSchema>
 
 
     const handleSubmit = (values: Values, actions: FormikHelpers<any>) => {
-        const journal = {profileName:profile.profileName, profileId: null, profileEmail: profile.profileEmail}
+
         const {setStatus, resetForm} = actions
-        fetch('/apis/profile/:profileId', {
+        fetch(`/api/profile/`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "authorization": `${authorization}`
             },
-            body: JSON.stringify(profile)
+            body: JSON.stringify(values)
         }).then(response => response.json()).then(json => {
             let type = 'alert alter-danger'
             if (json.status === 200) {
                 console.log(json.data)
                 resetForm()
                 router.refresh()
-                window.location.href = '/profile/:profileId'
+                window.location.href = `/profile/`
             }
             setStatus({type:json, message: json.message})
         })
     }
     return(
         <>
-            <h1>Profile</h1>
+            <h1 className="text-2xl text-center mt-4 mb-4">Profile</h1>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -72,7 +95,7 @@ export default function ProfileForm (props: ProfileUpdateProps) {
     )
 }
 
-function ProfileUpdateFormContent (props: any) {
+function ProfileUpdateFormContent(props: any) {
     const {
         status,
         values,
@@ -84,110 +107,59 @@ function ProfileUpdateFormContent (props: any) {
         handleReset
     } = props;
 
-    return(
-        <div className="container">
-            <form id="profileForm" onSubmit={handleSubmit} className="mb-10">
-                <div>
+    return (
+        <div className="flex justify-center">
+            <form id="profileForm" onSubmit={handleSubmit} className="w-1/2">
+                <div className="mb-4">
+                    <label className="block font-semibold mb-4">Name</label>
                     <input
-                        //onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.profileName}
-                        className="input input-bordered w-full max"
+                        className="input input-bordered w-1/2"
                         type="text"
                         id="profileName"
                         name="profileName"
-                        style={{
-                            fontSize: '16px',
-                            width: '100%',
-                            padding: '10px 10px',
-                            marginBottom: '10px',
-                            color: '#444',
-                        }
-                        }
-                        // placeholder={profile.profileName}
                         required
                     />
-
+                    <DisplayError errors={errors} touched={touched} field={"profileName"} />
                 </div>
 
-                <DisplayError errors={errors} touched={touched} field={"profileName"}/>
-                <h2
-                    style={{
-                        fontSize: '16px',
-                        width: '100%',
-                        padding: '10px 10px',
-                        marginBottom: '10px',
-                        color: '#444',
-                    }
-                    }>{values.profileEmail}</h2>
-                <div>
+                <div className="mb-4">
+                    <label className="block font-semibold">Email</label>
+                    <h2 className="p-3 mt-4 mb-4 bg-base-200 text-neutral-content rounded-md w-1/2">{values.profileEmail}</h2>
+                </div>
+
+                <div className="mb-4">
+                    <label className="block mb-4 font-semibold">New Password</label>
                     <input
-                        //onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.profilePassword}
-                        className="input input-bordered w-full max"
-                        type="text"
+                        className="input input-bordered w-1/2"
+                        type="password"
                         id="profilePassword"
                         name="profilePassword"
-                        style={{
-                            fontSize: '16px',
-                            width: '100%',
-                            padding: '10px 10px',
-                            marginBottom: '10px',
-                            color: '#444',
-                        }
-                        }
                         placeholder="Enter new password"
-                        required
                     />
-
                 </div>
-                <div>
+
+                <div className="mb-4">
+                    <label className="block mb-4 font-semibold">Confirm New Password</label>
                     <input
-                        //onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.profilePasswordConfirm}
-                        className="input input-bordered w-full max"
-                        type="text"
+                        className="input input-bordered w-1/2"
+                        type="password"
                         id="profilePasswordConfirm"
                         name="profilePasswordConfirm"
-                        style={{
-                            fontSize: '16px',
-                            width: '100%',
-                            padding: '10px 10px',
-                            marginBottom: '10px',
-                            color: '#444',
-                        }
-                        }
                         placeholder="Confirm new password"
-                        required
                     />
-
+                    <DisplayError errors={errors} touched={touched} field={"profilePasswordConfirm"} />
                 </div>
 
-                <DisplayError errors={errors} touched={touched} field={"profileName"}/>
-
-                <DisplayError errors={errors} touched={touched} field={"profileName"}/>
-                {/* <DisplayStatus status={status} />*/}
-
-                <div style={{textAlign: 'center'}}>
-                    <button
-                        type="submit"
-                        className="btn btn-success"
-                        style={{
-                            fontSize: '15px',
-                            padding: '08px 15px',
-                            backgroundColor: '#3498db',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '5px',
-                        }}
-                    >
-                        Submit
-                    </button>
-                </div>
-                <DisplayStatus status={status}/>
+                <button type="submit" className="btn btn-primary">Submit</button>
+                <DisplayStatus status={status} />
             </form>
+            <FormDebugger {...props} />
         </div>
     )
 }
