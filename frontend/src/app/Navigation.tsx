@@ -46,7 +46,7 @@ export async function Navigation () {
                         {trackers.map(tracker => <li><Link href={`/log/${tracker.trackerId}`}>{tracker.trackerCategory}</Link></li>)}
                         <li><a href='/journal'>Journal</a></li>
                         <li><a href='/graph'>Graph</a></li>
-                        <li></li>
+                        <li><a href='/profile'>Profile</a></li>
                         <li><a>Logout</a></li>
                     </ul>
                 </div>
