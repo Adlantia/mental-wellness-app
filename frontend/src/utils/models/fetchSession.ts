@@ -1,6 +1,6 @@
 import {Profile, ProfileSchema} from "@/utils/models/profile.model";
 import {cookies} from "next/headers";
-import {jwtDecode} from "jwt-decode";
+import {jwtDecode} from 'jwt-decode';
 import { unstable_noStore as noStore } from 'next/cache';
 
 noStore()

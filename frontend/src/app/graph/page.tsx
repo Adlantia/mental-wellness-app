@@ -38,7 +38,7 @@ export default async function () {
             if(tracker.trackerId === log.logTrackerId) {
                 newLog[tracker.trackerCategory] = log.logAnswer
             }   else {
-                if(tracker.trackerCategory === "Sleep") {
+                if(tracker.trackerCategory.toLowerCase() === "sleep") {
                     // if tracker category is "Sleep" and the current index is not the first element,
                     // set the value to the previous value of Sleep, otherwise set it to null
 
