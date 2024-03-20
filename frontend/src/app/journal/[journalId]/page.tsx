@@ -14,7 +14,14 @@ export default async function ViewJournalEntry ({params}: {params: {journalId: s
     const journal = await getData(journalId, session.authorization)
     return (
         <>
-            <a href="/journal" className="btn" > Go Back </a>
+            <div className="group inline-block relative">
+                <button className="btn">
+                    <a href="/journal"> Go Back </a>
+                </button>
+                <span
+                    className="hidden group-hover:block absolute top-full left-1/2 transform -translate-x-1/2 bg-gray-100 p-2 rounded shadow-md text-xs">Journal Page</span>
+            </div>
+
             <div className="p-4 w-3/4 mx-auto">
 
 
@@ -33,6 +40,6 @@ export default async function ViewJournalEntry ({params}: {params: {journalId: s
     )
 }
 
-async function getData(journalId: string, authorization:string): Promise<Journal> {
-    return  fetchJournalByJournalId(journalId, authorization)
+async function getData(journalId: string, authorization: string): Promise<Journal> {
+    return fetchJournalByJournalId(journalId, authorization)
 }
