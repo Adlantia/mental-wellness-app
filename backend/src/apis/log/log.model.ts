@@ -20,7 +20,7 @@ export async function insertLog(log: Log): Promise<string> {
               VALUES (gen_random_uuid(), ${logProfileId}, ${logTrackerId}, ${logAnswer}, NOW())`
 
     // return a message to the user indicating success
-    return 'log successfully entered'
+    return `Successfully recorded!`
 }
 
 /**

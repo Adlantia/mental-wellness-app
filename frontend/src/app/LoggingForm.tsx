@@ -2,10 +2,11 @@
 import {Form, Formik, FormikHelpers} from "formik";
 import {Session} from "@/utils/models/fetchSession";
 import {useRouter} from "next/navigation";
-import {Values, z} from "zod";
+import {z} from "zod";
 import {LogSchema} from "@/utils/models/log.model";
 import {FormDebugger} from "@/app/components/formDebugger";
 import {DisplayError} from "@/app/components/displayError";
+import {DisplayStatus} from "@/app/components/displayStatus";
 
 type LoggingFormProps = {
     session: Session,
@@ -15,7 +16,7 @@ type LoggingFormProps = {
 export function LoggingForm(props: LoggingFormProps) {
     const router = useRouter()
     const {session, trackerId} = props
-    console.log("session", session)
+    // console.log("session", session)
     if (session === undefined) {
         return <></>
     }
@@ -34,7 +35,7 @@ export function LoggingForm(props: LoggingFormProps) {
             "logAnswer": Number(values.logAnswer),
             "logDatetime": null
         }
-        console.log(log)
+        // console.log(log)
         let {setStatus, resetForm} = actions
         fetch('/apis/log', {
             method: "POST",
@@ -62,7 +63,7 @@ export function LoggingForm(props: LoggingFormProps) {
 }
 
 function LoggingFormContent(props: any) {
-    const {handleChange, handleSubmit, errors, touched} = props;
+    const {status, handleChange, handleSubmit} = props;
 
     return (
         <>
@@ -74,12 +75,13 @@ function LoggingFormContent(props: any) {
                     <label className='btn btn-circle focus:bg-slate-400'><input type="radio" name={"logAnswer"} value={4} onChange={handleChange}/>4</label>
                     <label className='btn btn-circle focus:bg-slate-400'><input type="radio" name={"logAnswer"} value={5} onChange={handleChange}/>5</label>
                 </div>
-                <DisplayError errors={errors} touched={touched} field={"logAnswer"} />
+                {/*<DisplayError errors={errors} touched={touched} field={"logAnswer"} />*/}
                 <div className='flex justify-center gap-4 my-6'>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
+                <DisplayStatus status={status} />
             </Form>
-            <FormDebugger {...props} />
+            {/*<FormDebugger {...props} />*/}
         </>
     )
 }
