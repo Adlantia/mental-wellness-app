@@ -12,7 +12,7 @@ export  async function AddUserName() {
 
     return (
 
-        <h2>  Hi, {profileName}
+        <h2 className="inline-block">  Hi, {profileName}
        </h2>
     )}
 }
