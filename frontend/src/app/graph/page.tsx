@@ -19,7 +19,6 @@ export default async function () {
         redirect("/login")
 
     }
-    console.log(session)
     const {logs, trackers}= await getData(session.authorization)
     console.log("logs", logs)
 

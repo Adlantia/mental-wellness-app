@@ -30,9 +30,13 @@ export async function getSession(): Promise<Session|undefined > {
     }
 
 }
+export async function setProfile(profile: Profile) {
+    if (session) {
+        session.profile = profile
+    }
+}
 
-
-function setJwtToken(jwtToken: string) {
+export function setJwtToken(jwtToken: string) {
 
     try {
         const  parsedJwtToken = jwtDecode(jwtToken) as any

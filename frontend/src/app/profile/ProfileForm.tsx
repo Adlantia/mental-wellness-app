@@ -31,8 +31,8 @@ export default function ProfileForm (props: ProfileUpdateProps) {
         profileId: profile.profileId,
         profileName: profile.profileName,
         profileEmail: profile.profileEmail,
-        profilePassword: null,
-        profilePasswordConfirm: null
+        profilePassword: "",
+        profilePasswordConfirm: ""
     }
 
     const formSchema = ProfileSchema.pick({profileName: true, profileEmail:true, profileId: true, profilePassword: true, profilePasswordConfirm: true})
@@ -46,19 +46,21 @@ export default function ProfileForm (props: ProfileUpdateProps) {
                 .string({required_error: "Profile Name is required"})
                 .min(1, {message: 'please provide a valid profile name (min 1 characters'})
                 .max(32, {message: 'please provide a valid profile name (max 32 characters'}),
-            profilePassword: z
-                .string({required_error: "profile password is required", invalid_type_error: "please provide a valid password"})
-                .min(8, {message: 'please provide a valid password (min 8 characters)'})
-                .max(32, {message: 'please provide a valid password (max 32 characters)'}).nullable(),
-            profilePasswordConfirm: z
-                .string({required_error: "profile password is required", invalid_type_error: "please provide a valid password"})
-                .min(8, {message: 'please provide a valid password (min 8 characters)'})
-                .max(32, {message: 'please provide a valid password (max 32 characters)'}).nullable()
+            // profilePassword: z
+            //     .string({required_error: "profile password is required", invalid_type_error: "please provide a valid password"})
+            //     // .min(8, {message: 'please provide a valid password (min 8 characters)'})
+            //     .max(32, {message: 'please provide a valid password (max 32 characters)'}).nullable(),
+            // profilePasswordConfirm: z
+            //     .string({required_error: "profile password is required", invalid_type_error: "please provide a valid password"})
+            //     // .min(8, {message: 'please provide a valid password (min 8 characters)'})
+            //     .max(32, {message: 'please provide a valid password (max 32 characters)'}).nullable()
         })
     type Values = z.infer<typeof formSchema>
 
 
-    const handleSubmit = (values: Values, actions: FormikHelpers<any>) => {
+    const handleSubmit = (values: any, actions: FormikHelpers<any>) => {
+        values.profilePasswordConfirm = values.profilePasswordConfirm === "" ? null : values.profilePasswordConfirm
+        values.profilePassword = values.profilePassword === "" ? null : values.profilePassword
 
         const {setStatus, resetForm} = actions
         fetch(`/api/profile/`, {
@@ -71,10 +73,9 @@ export default function ProfileForm (props: ProfileUpdateProps) {
         }).then(response => response.json()).then(json => {
             let type = 'alert alter-danger'
             if (json.status === 200) {
-                console.log(json.data)
+                console.log(json)
                 resetForm()
                 router.refresh()
-                window.location.href = `/profile/`
             }
             setStatus({type:json, message: json.message})
         })
