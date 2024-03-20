@@ -1,8 +1,12 @@
 import { metadata} from "@/app/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import {fetchAllTrackers} from "@/utils/http/tracker.http";
+import {Tracker} from "@/utils/models/tracker.model";
+import Link from "next/link";
 
-export function Navigation () {
+export async function Navigation () {
+    const trackers =  await getData()
     return (
         <div className="navbar bg-base-300 justify-between">
             <div className="flex-none">
@@ -23,8 +27,7 @@ export function Navigation () {
                     </div>
                     <ul tabIndex={0}
                         className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-52">
-                        <li><a href='/mood'>Mood</a></li>
-                        <li><a href='/sleep'>Sleep</a></li>
+                        {trackers.map(tracker => <li><Link href={`/log/${tracker.trackerId}`}>{tracker.trackerCategory}</Link></li>)}
                         <li><a href='/journal'>Journal</a></li>
                         <li><a href='/graph'>Graph</a></li>
                         <li><a>Logout</a></li>
@@ -32,4 +35,8 @@ export function Navigation () {
                 </div>
             </div>
     )
+}
+
+async function getData(): Promise<Tracker[]> {
+    return  await fetchAllTrackers()
 }
