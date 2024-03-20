@@ -10,12 +10,15 @@ export async function Navigation () {
     return (
         <div className="navbar bg-base-300 justify-between">
             <div className="flex-none">
-                <button className="btn btn-circle btn-ghost color-primary">
-                    <a href='/dashboard'><FontAwesomeIcon className="w-5 h-5" icon={faHouse}/></a>
-                </button>
-            </div>
+                <a href='/dashboard'>
+                    <button className="btn btn-circle btn-ghost color-primary">
+                        <FontAwesomeIcon className="w-5 h-5" icon={faHouse}/>
+            </button>
+        </a>
+
+        </div>
             <div>
-                <a className="btn btn-ghost text-xl">Mindsight</a>
+                <a className=" text-xl">Mindsight</a>
             </div>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">

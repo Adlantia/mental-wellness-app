@@ -74,7 +74,7 @@ export function Graph(props: graphProps) {
         <>
             <div className="container flex mx-auto flex-col items-center pt-8 rounded-lg">
                 <h1 className="text-3xl font-semibold text-center mb-5">Graph Insights</h1>
-                <p className="text-lg text-center mb-6">Explore the correlation different sleep and mood over
+                <p className="text-lg text-center mb-6">Explore the correlation between sleep and mood over
                     time.</p>
                 <div className="bg-gray-100 p-6 shadow-md"
                     suppressHydrationWarning={true}>
