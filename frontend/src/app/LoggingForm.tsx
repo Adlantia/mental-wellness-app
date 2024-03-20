@@ -10,12 +10,13 @@ import {DisplayStatus} from "@/app/components/displayStatus";
 
 type LoggingFormProps = {
     session: Session,
-    trackerId: string
+    trackerId: string,
+    trackerCategory: string
 }
 
 export function LoggingForm(props: LoggingFormProps) {
     const router = useRouter()
-    const {session, trackerId} = props
+    const {session, trackerId, trackerCategory} = props
     // console.log("session", session)
     if (session === undefined) {
         return <></>
@@ -51,7 +52,7 @@ export function LoggingForm(props: LoggingFormProps) {
                 //redirect to dashboard after successful recording; too quick - is there a way to add a delay
                 // window.location.href = '/dashboard'
             }
-            setStatus({type: json, message: json.message})
+            setStatus({type: json, message: trackerCategory + " " + json.message})
         })
     }
 
@@ -79,9 +80,12 @@ function LoggingFormContent(props: any) {
                 </div>
                 {/*<DisplayError errors={errors} touched={touched} field={"logAnswer"} />*/}
                 <div className='flex justify-center gap-4 my-6'>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <DisplayStatus status={status}/>
                 </div>
-                <DisplayStatus status={status} />
+                    <div className='flex justify-center gap-4 my-6'>
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </div>
+
             </Form>
             {/*<FormDebugger {...props} />*/}
         </>
