@@ -14,22 +14,23 @@ export default async function ViewJournalEntry ({params}: {params: {journalId: s
     const journal = await getData(journalId, session.authorization)
     return (
         <>
-        <div className="p-4 w-3/4 mx-auto">
+            <a href="/journal" className="btn" > Go Back </a>
+            <div className="p-4 w-3/4 mx-auto">
 
 
-           <em>{journal.journalDateTime?.toDateString()} </em>
+                <em>{journal.journalDateTime?.toDateString()} </em>
 
-            <h1 className="text-3xl mx-auto text-center my-3">
-                {journal.journalTitle}
-            </h1>
-            <p>
-                {journal.journalText}
-            </p>
+                <h1 className="text-3xl mx-auto text-center my-3">
+                    {journal.journalTitle}
+                </h1>
+                <p>
+                    {journal.journalText}
+                </p>
 
-        </div>
+            </div>
 
-</>
-)
+        </>
+    )
 }
 
 async function getData(journalId: string, authorization:string): Promise<Journal> {

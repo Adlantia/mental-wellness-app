@@ -43,8 +43,10 @@ export function JournalForm (props: JournalFormProps) {
         }).then(response => response.json()).then(json => {
            let type = 'alert alter-danger'
             if (json.status === 200) {
-                console.log(json.data)
+                setStatus({type:json, message: json.message})
                 resetForm()
+                setTimeout(() => {
+                }, 5000);
                 router.refresh()
                 window.location.href = '/journal'
             }

@@ -32,6 +32,7 @@ export function Navigation () {
                         <li><a href='/sleep'>Sleep</a></li>
                         <li><a href='/journal'>Journal</a></li>
                         <li><a href='/graph'>Graph</a></li>
+                        <li></li>
                         <li><a>Logout</a></li>
                     </ul>
                 </div>
