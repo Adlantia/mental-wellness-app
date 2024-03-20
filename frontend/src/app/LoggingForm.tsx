@@ -48,6 +48,8 @@ export function LoggingForm(props: LoggingFormProps) {
             if (json.status === 200) {
                 resetForm()
                 router.refresh()
+                //redirect to dashboard after successful recording; too quick - is there a way to add a delay
+                // window.location.href = '/dashboard'
             }
             setStatus({type: json, message: json.message})
         })
