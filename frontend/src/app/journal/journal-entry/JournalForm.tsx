@@ -22,8 +22,6 @@ export function JournalForm (props: JournalFormProps) {
         return <> Please Login</>
     }
 
- c
-
     const initialValues  = {
         journalTitle: '',
         journalText: ''
