@@ -9,14 +9,12 @@ export function isLoggedInController(request: Request, response: Response, next:
     try {
         //get the profile from the session
         const profile: PublicProfile | undefined = request.session?.profile
-        console.log("profile from session in isLoggedInController", request.cookies)
 
         //get the signature from the session
         const signature: string | undefined = request.session?.signature
 
         //get the unparsed jwt token from request header
         const unverifiedJwtToken: string | undefined = request.headers?.authorization
-        console.log("jwt-token", unverifiedJwtToken)
 
 
         //if the profile signature or jwt token are undefined, return predefined status
@@ -25,9 +23,6 @@ export function isLoggedInController(request: Request, response: Response, next:
         }
 
         //verify the jwt token from request header matches jwt token from session; if no match return predefined status
-        if (unverifiedJwtToken !== request.session?.jwt) {
-            return response.json(status)
-        }
 
         //verify that jwt token from request is valid
         verify(unverifiedJwtToken, signature)

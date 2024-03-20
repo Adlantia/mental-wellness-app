@@ -3,7 +3,8 @@ import { Status } from "../../utils/interfaces/Status";
 import { zodErrorResponse } from "../../utils/response.utils";
 import { PrivateProfile, updateProfile, selectPrivateProfileByProfileId } from "./profile.model";
 import { PublicProfileSchema } from "./profile.validator";
-import {setHash} from "../../utils/auth.utils";
+import {generateJwt, setHash} from "../../utils/auth.utils";
+import {UpdateProfileSchema} from "./updateProfile.validator";
 
 /**
  * Express controller for updating a profile
@@ -15,7 +16,7 @@ import {setHash} from "../../utils/auth.utils";
 export async function putProfileController(request:Request, response: Response): Promise<Response<Status>> {
     try {
         //validate updated profile data coming from request body
-        const validationResultForRequestBody = PublicProfileSchema.safeParse(request.body)
+        const validationResultForRequestBody = UpdateProfileSchema.safeParse(request.body)
 
         //if validation of the body unsuccessful, return a preformatted response to client
         if(!validationResultForRequestBody.success) {
@@ -26,16 +27,16 @@ export async function putProfileController(request:Request, response: Response):
         const validationResultForRequestParams = PublicProfileSchema.pick({profileId: true}).safeParse(request.params)
 
         //if validation of params unsuccessful, return preformatted response to client
-        if(!validationResultForRequestParams.success) {
-            return zodErrorResponse(response, validationResultForRequestParams.error)
-        }
+        // if(!validationResultForRequestParams.success) {
+        //     return zodErrorResponse(response, validationResultForRequestParams.error)
+        // }
 
         //grab profileId from the session
         const profileFromSession = request.session?.profile
         const profileIdFromSession = profileFromSession?.profileId
 
         //grab profileId off the validated request parameters
-        const {profileId} = validationResultForRequestParams.data
+        const {profileId} = request.params
 
         if(profileIdFromSession !== profileId) {
             return response.json({status: 400, message: 'You cannot update a profile that is not yours', data: null})
@@ -51,8 +52,9 @@ export async function putProfileController(request:Request, response: Response):
         if(profile === null) {
             return response.json({status: 400, message: 'Profile does not exist', data: null})
         }
-
-        const profileHash = await setHash(profilePassword)
+        if (profilePassword) {
+            profile.profileHash = await setHash(profilePassword)
+        }
 
         //update the profile with the new data
         profile.profileName = profileName
@@ -60,8 +62,16 @@ export async function putProfileController(request:Request, response: Response):
         //update the profile in the database 
         await updateProfile(profile)
 
+        //generate new jwt for session using profile info and signature
+        const authorization: string = generateJwt({
+            profileId, profileName, profileEmail: profile.profileEmail
+        }, request.session.signature as string)
+
+        request.session.jwt = authorization
+        response.header(authorization)
+
         //return a response to client with success message 
-        return response.json({status: 200, message: 'Profile successfully updated', data: null})
+        return response.json({status: 200, message: 'Profile successfully updated', data: authorization})
     } catch (error: unknown) {
         return response.json({status: 500, message: 'internal server error', data: null})
     }
