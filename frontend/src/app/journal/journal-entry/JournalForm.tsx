@@ -79,7 +79,7 @@ function JournalLoginFormContent (props: any) {
     return(
         <>
             <header style={{ fontSize: '24px', margin: '20px 0', textAlign: 'center' }}>
-                Journal
+               <a href="/journal">Journal</a>
             </header>
 
 
