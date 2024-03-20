@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+
 export const PrivateProfileSchema = z.object({
     profileId: z.string({
         required_error: 'profileId is required',
