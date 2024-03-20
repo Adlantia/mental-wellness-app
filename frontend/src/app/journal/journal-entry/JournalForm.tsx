@@ -22,7 +22,7 @@ export function JournalForm (props: JournalFormProps) {
         return <> Please Login</>
     }
 
-    const {profile, authorization} = session
+ c
 
     const initialValues  = {
         journalTitle: '',

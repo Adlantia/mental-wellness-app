@@ -3,6 +3,7 @@ import { Status } from "../../utils/interfaces/Status";
 import { zodErrorResponse } from "../../utils/response.utils";
 import { PrivateProfile, updateProfile, selectPrivateProfileByProfileId } from "./profile.model";
 import { PublicProfileSchema } from "./profile.validator";
+import {setHash} from "../../utils/auth.utils";
 
 /**
  * Express controller for updating a profile
@@ -41,7 +42,7 @@ export async function putProfileController(request:Request, response: Response):
         }
 
         //grab the profile data off the validated request body
-        const {profileName} = validationResultForRequestBody.data
+        const {profileName, profilePassword} = validationResultForRequestBody.data
 
         //grab the profile by profileId
         const profile: PrivateProfile | null = await selectPrivateProfileByProfileId(profileId)
@@ -50,6 +51,8 @@ export async function putProfileController(request:Request, response: Response):
         if(profile === null) {
             return response.json({status: 400, message: 'Profile does not exist', data: null})
         }
+
+        const profileHash = await setHash(profilePassword)
 
         //update the profile with the new data
         profile.profileName = profileName
