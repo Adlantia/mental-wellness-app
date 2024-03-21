@@ -7,9 +7,11 @@ import {SignUp, SignUpSchema} from "@/utils/models/profile.model";
 import {DisplayError} from "@/app/components/displayError";
 import {DisplayStatus} from "@/app/components/displayStatus";
 import {FormDebugger} from "@/app/components/formDebugger";
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 
-export default function SignUpForm() {
+export function SignUpForm() {
 
     const initialValues: SignUp = {
         profileId: null,

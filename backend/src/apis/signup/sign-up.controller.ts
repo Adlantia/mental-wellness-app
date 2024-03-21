@@ -42,7 +42,7 @@ export async function signUpController (request: Request, response: Response): P
         const mailgunMessage = {
         from: `Mailgun Sandbox <mailgun@${process.env.MAILGUN_DOMAIN as string}>`,
         to: profileEmail,
-        subject: 'One step closer to signup -- Account Activation',
+        subject: 'One step closer to (signup) -- Account Activation',
         html: message}
 
 

@@ -1,7 +1,8 @@
 import {LogButton} from "@/app/dashboard/LogButton";
 import {Tracker} from "@/utils/models/tracker.model";
 import {fetchAllTrackers} from "@/utils/http/tracker.http";
-
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 export default async function Dashboard () {
     const trackers =  await getData()
