@@ -31,6 +31,8 @@ services:
   app:
     build: frontend
     user: "node"
+    ports:
+      - '80:3000'
     env_file:
       - ./project.env
     depends_on:
