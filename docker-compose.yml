@@ -28,6 +28,14 @@ services:
     volumes:
       - ./backend/src:/home/node/app/src
       - ./backend/tsconfig.json:/home/node/app/tsconfig.json
+  app:
+    build: frontend
+    user: "node"
+    env_file:
+      - ./project.env
+    depends_on:
+      - node
+    #    For deploying to server use ports: - 80:80
 volumes:
   sql:
     driver: local
